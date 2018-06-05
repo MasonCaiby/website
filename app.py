@@ -41,9 +41,9 @@ def light_controls():
     #TODO: move into html for live update.
 
     try:
-        r = pi1.get_PWM_dutycycle(11)
-        g = pi1.get_PWM_dutycycle(13)
-        b = pi1.get_PWM_dutycycle(17)
+        r = pi1.get_PWM_dutycycle(17)
+        g = pi1.get_PWM_dutycycle(27)
+        b = pi1.get_PWM_dutycycle(22)
     except AttributeError:
         r = 0
         g = 0
@@ -54,16 +54,15 @@ def light_controls():
             new_colors = np.array([request.form['red'],request.form['green'],request.form['blue']])
             new_colors = new_colors.astype('int')
             assert (np.all(new_colors<256) and np.all(new_colors>=0))
-            radio = request.form['mode']
-            pi1.set_PWM_dutycycle(11,new_colors[0])
-            pi1.set_PWM_dutycycle(13,new_colors[1])
-            pi1.set_PWM_dutycycle(17,new_colors[2])
-            r = pi1.get_PWM_dutycycle(11)
-            g = pi1.get_PWM_dutycycle(13)
-            b = pi1.get_PWM_dutycycle(17)
+            pi1.set_PWM_dutycycle(17,new_colors[0])
+            pi1.set_PWM_dutycycle(27,new_colors[1])
+            pi1.set_PWM_dutycycle(22,new_colors[2])
+            r = pi1.get_PWM_dutycycle(17)
+            g = pi1.get_PWM_dutycycle(27)
+            b = pi1.get_PWM_dutycycle(22)
         except (ValueError,AssertionError):
             flash('You need to type a value between 0 and 255 for all boxes')
     return render_template('light_controls.html',r_value=r,g_value=g,b_value=b)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
