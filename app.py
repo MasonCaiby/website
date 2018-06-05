@@ -65,4 +65,4 @@ def light_controls():
     return render_template('light_controls.html',r_value=r,g_value=g,b_value=b)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
