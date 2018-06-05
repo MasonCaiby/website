@@ -1,0 +1,39 @@
+<head>
+  <link rel="stylesheet" href="../../static/styles.css">
+</head>
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="mailto:maxwell.caudle@gmail.com?Subject=Your%20amazing%20website">Max Caudle</a>
+
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% if  request.endpoint == "index" %}custom-active{% endif %} navbar-custom:hover">
+        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {% if  request.endpoint == "climbing" %}custom-active{% endif %}">
+        <a class="nav-link" href="/climbing">Climbing</a>
+      </li>
+      <li class="nav-item {% if  request.endpoint == "contact" %}custom-active{% endif %}">
+        <a class="nav-link" href="/contact">Contact</a>
+      </li>
+      <li class="nav-item {% if  request.endpoint == "controls" %}custom-active{% endif %}">
+        <a class="nav-link" href="/controls">Controls</a>
+      </li>
+      <li class="projects dropdown {% if  request.endpoint in ["wildlife", "handler", "table"] %}custom-active{% endif %}">
+          <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
+          <div class="dropdown-menu " aria-labelledby="dropdown01">
+            <a class="dropdown-item {% if  request.endpoint == "wildlife" %}custom-active{% endif %}" href="/wildlife">Wildlife Detection</a>
+            <a class="dropdown-item {% if  request.endpoint == "handler" %}custom-active{% endif %}" href="/handler">SO Handler</a>
+            <a class="dropdown-item {% if  request.endpoint == "table" %}custom-active{% endif %}" href="/table">Picnic Table</a>
+          </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
