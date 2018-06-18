@@ -68,7 +68,7 @@ def light_controls():
     return render_template('light_controls.html',r_value=r,g_value=g,b_value=b)
 
 if __name__ == '__main__':
-    os.system('/home/pi/website/startup_commands.sh')
+    os.system('sudo /home/pi/website/startup_commands.sh')
     pi1.set_PWM_dutycycle(17,0)
     pi1.set_PWM_dutycycle(27,0)
     pi1.set_PWM_dutycycle(22,0)
