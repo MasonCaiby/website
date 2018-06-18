@@ -19,13 +19,15 @@ def convert_colors(image_path, new_value, verbose=False, save_file=False):
     if save_file:
         misc.imsave(save_file, arr)
 
-def fade_colors(pi1, old_colors, new_colors):
+def fade_colors(pi1, old_colors, new_colors, rgb_gpio):
     deltas = new_colors - old_colors
     max_d = np.max(np.absolute(deltas))
     increments = deltas / max_d
     for i in range(max_d):
         old_colors = old_colors + increments
-        update_strip(pi1, old_colors, [17, 27, 22])
+        #turn negatives into 0
+        old_colors = (old_colors + np.absolute(old_colors))/2
+        update_strip(pi1, old_colors, rgb_gpio)
         time.sleep(.01)
 
 def update_strip(pi1, new_colors, rgb_gpio):

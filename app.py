@@ -67,7 +67,7 @@ def light_controls():
             new_colors = np.array([request.form['red'],request.form['green'],request.form['blue']])
             new_colors = new_colors.astype('int')
             assert (np.all(new_colors<256) and np.all(new_colors>=0))
-            fade_colors(pi1, np.array([r, g, b]), new_colors)
+            fade_colors(pi1, np.array([r, g, b]), new_colors, [17, 27, 22])
             r = pi1.get_PWM_dutycycle(17)
             g = pi1.get_PWM_dutycycle(27)
             b = pi1.get_PWM_dutycycle(22)
