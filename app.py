@@ -48,6 +48,8 @@ def light_controls():
         r = 0
         g = 0
         b = 0
+    except:
+        print(Exception)
 
     if request.method == 'POST':
         try:
