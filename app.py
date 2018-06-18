@@ -2,6 +2,7 @@ from flask import Flask, request, session, g, url_for, \
 render_template, flash
 import pigpio
 import numpy as np
+import os
 
 app = Flask(__name__)
 app.debug = True
@@ -67,6 +68,7 @@ def light_controls():
     return render_template('light_controls.html',r_value=r,g_value=g,b_value=b)
 
 if __name__ == '__main__':
+    os.system('/home/pi/website/startup_commands.sh')
     pi1.set_PWM_dutycycle(17,0)
     pi1.set_PWM_dutycycle(27,0)
     pi1.set_PWM_dutycycle(22,0)
