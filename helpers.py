@@ -1,9 +1,13 @@
-#from scipy import misc
-#from matplotlib import pyplot as plt
+
 import numpy as np
 import time
 
 def convert_colors(image_path, new_value, verbose=False, save_file=False):
+
+    # I know it's bad form to have imports in your functions, but I didn't want
+    # to install scipy and plt on my raspberry pi
+    from scipy import misc
+    from matplotlib import pyplot as plt
     arr = misc.imread(image_path)
     for i, row in enumerate(arr):
         for j, pixel in enumerate(row):
@@ -22,7 +26,7 @@ def fade_colors(pi1, old_colors, new_colors):
     for i in range(max_d):
         old_colors = old_colors + increments
         update_strip(pi1, old_colors, [17, 27, 22])
-	time.sleep(.01)
+        time.sleep(.01)
 
 def update_strip(pi1, new_colors, rgb_gpio):
     pi1.set_PWM_dutycycle(rgb_gpio[0],new_colors[0])

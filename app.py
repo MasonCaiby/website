@@ -11,7 +11,7 @@ app.debug = True
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 
-def statup_pigpio():
+def startup_pigpio():
     global pi1
     os.system('sudo /home/pi/website/startup_commands.sh')
     time.sleep(1)
@@ -73,8 +73,8 @@ def light_controls():
             b = pi1.get_PWM_dutycycle(22)
         except (ValueError,AssertionError):
             flash('You need to type a value between 0 and 255 for all boxes')
-    return render_template('light_controls.html',r_value=r,g_value=g,b_value=b)
+    return render_template('light_controls.html', r_value=r, g_value=g, b_value=b)
 
 if __name__ == '__main__':
-    statup_pigpio()
+    startup_pigpio()
     app.run(host='0.0.0.0')
