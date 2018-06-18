@@ -3,6 +3,7 @@ render_template, flash
 import pigpio
 import numpy as np
 import os
+import time
 
 app = Flask(__name__)
 app.debug = True
@@ -11,6 +12,7 @@ app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 def statup_pigpio():
     global pi1
     os.system('sudo /home/pi/website/startup_commands.sh')
+    time.sleep(1)
     pi1 = pigpio.pi()
     pi1.set_PWM_dutycycle(17,0)
     pi1.set_PWM_dutycycle(27,0)
