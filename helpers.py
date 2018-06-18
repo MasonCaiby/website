@@ -1,5 +1,6 @@
 from scipy import misc
 from matplotlib import pyplot as plt
+import numpy as np
 
 def convert_colors(image_path, new_value, verbose=False, save_file=False):
     arr = misc.imread(image_path)
@@ -12,6 +13,19 @@ def convert_colors(image_path, new_value, verbose=False, save_file=False):
         plt.imshow(arr, interpolation='nearest')
     if save_file:
         misc.imsave(save_file, arr)
+
+def fade_colors(pi1, old_colors, new_colors):
+    deltas = new_colors - old_colors
+    max_d = np.max(np.absolute(deltas))
+    increments = deltas / max_d
+    for i in range(max_d):
+        old_colors = old_colors + increments
+        update_strip(pi1, old_colors, [17, 27, 22])
+
+def update_strip(pi1, new_colors, rgb_gpio):
+    pi1.set_PWM_dutycycle(rgb_gpio[0],new_colors[0])
+    pi1.set_PWM_dutycycle(rgb_gpio[1],new_colors[1])
+    pi1.set_PWM_dutycycle(rgb_gpio[2],new_colors[2])
 
 if __name__ == '__main__':
 
