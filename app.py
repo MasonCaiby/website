@@ -8,7 +8,13 @@ app = Flask(__name__)
 app.debug = True
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
-pi1 = pigpio.pi()
+def statup_pigpio():
+    global pi1
+    os.system('sudo /home/pi/website/startup_commands.sh')
+    pi1 = pigpio.pi()
+    pi1.set_PWM_dutycycle(17,0)
+    pi1.set_PWM_dutycycle(27,0)
+    pi1.set_PWM_dutycycle(22,0)
 
 @app.route('/')
 def index():
@@ -68,8 +74,5 @@ def light_controls():
     return render_template('light_controls.html',r_value=r,g_value=g,b_value=b)
 
 if __name__ == '__main__':
-    os.system('sudo /home/pi/website/startup_commands.sh')
-    pi1.set_PWM_dutycycle(17,0)
-    pi1.set_PWM_dutycycle(27,0)
-    pi1.set_PWM_dutycycle(22,0)
+    statup_pigpio()
     app.run(host='0.0.0.0')
