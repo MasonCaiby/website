@@ -11,9 +11,10 @@ def convert_colors(image_path, new_value, verbose=False, save_file=False):
     arr = misc.imread(image_path)
     for i, row in enumerate(arr):
         for j, pixel in enumerate(row):
-            if pixel[3] > 0:
+            if np.all(pixel[:3] < 254) and pixel[3]==255:
                 arr[i, j] = new_value
-
+            else:
+                arr[i, j] = [255,255,255,0]
     if verbose:
         plt.imshow(arr, interpolation='nearest')
     if save_file:

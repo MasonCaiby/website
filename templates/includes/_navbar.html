@@ -4,30 +4,30 @@
 
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="mailto:maxwell.caudle@gmail.com?Subject=Your%20amazing%20website">Max Caudle</a>
+  <a class="navbar-brand" href="mailto:maxwell.caudle@gmail.com?Subject=Your%20amazing%20website" style="text-decoration: none">Max Caudle</a>
 
   </button>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item {% if  request.endpoint == "index" %}custom-active{% endif %} navbar-custom:hover">
-        <a class="nav-link {% if  request.endpoint == "index" %}custom-active-text{% endif %}" href="/">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link {% if  request.endpoint == "index" %}custom-active-text{% endif %}" href="/" style="text-decoration: none">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item {% if  request.endpoint == "climbing" %}custom-active{% endif %}">
-        <a class="nav-link {% if  request.endpoint == "climbing" %}custom-active-text{% endif %}" href="/climbing">Climbing</a>
+        <a class="nav-link {% if  request.endpoint == "climbing" %}custom-active-text{% endif %}" href="/climbing" style="text-decoration: none">Climbing</a>
       </li>
       <li class="nav-item {% if  request.endpoint == "contact" %}custom-active{% endif %}">
-        <a class="nav-link {% if  request.endpoint == "contact" %}custom-active-text{% endif %}" href="/contact">Contact</a>
+        <a class="nav-link {% if  request.endpoint == "contact" %}custom-active-text{% endif %}" href="/contact" style="text-decoration: none">Contact</a>
       </li>
       <li class="nav-item {% if  request.endpoint == "light_controls" %}custom-active{% endif %}">
-        <a class="nav-link {% if  request.endpoint == "light_controls" %}custom-active-text{% endif %}" href="/controls">Controls</a>
+        <a class="nav-link {% if  request.endpoint == "light_controls" %}custom-active-text{% endif %}" href="/controls" style="text-decoration: none">Controls</a>
       </li>
       <li class="projects dropdown {% if  request.endpoint in ["wildlife", "handler", "table"] %}custom-active{% endif %}">
-          <a class="nav-link dropdown-toggle {% if  request.endpoint in ["wildlife", "handler", "table"] %}custom-active-text{% endif %}" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
+          <a class="nav-link dropdown-toggle {% if  request.endpoint in ["wildlife", "handler", "table"] %}custom-active-text{% endif %}" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none">Projects</a>
           <div class="dropdown-menu " aria-labelledby="dropdown01">
-            <a class="dropdown-item {% if  request.endpoint == "wildlife" %}custom-active{% endif %}" href="/wildlife">Wildlife Detection</a>
-            <a class="dropdown-item {% if  request.endpoint == "handler" %}custom-active{% endif %}" href="/handler">SO Handler</a>
-            <a class="dropdown-item {% if  request.endpoint == "table" %}custom-active{% endif %}" href="/table">Picnic Table</a>
+            <a class="dropdown-item {% if  request.endpoint == "wildlife" %}custom-active{% endif %}" href="/wildlife" style="text-decoration: none">Wildlife Detection</a>
+            <a class="dropdown-item {% if  request.endpoint == "handler" %}custom-active{% endif %}" href="/handler" style="text-decoration: none">SO Handler</a>
+            <a class="dropdown-item {% if  request.endpoint == "table" %}custom-active{% endif %}" href="/table" style="text-decoration: none">Picnic Table</a>
           </div>
       </li>
     </ul>

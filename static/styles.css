@@ -1,3 +1,16 @@
+a {
+  text-decoration: underline;
+  color:#22e490;
+}
+
+a:hover {
+  color:#22e490;
+}
+
+.new-window {
+  width:20px;
+  height:20px;
+}
 
 .custom-active {
   background-color: #22e490;
