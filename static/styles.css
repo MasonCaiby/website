@@ -109,3 +109,13 @@ a:hover {
     background: blue;
     cursor: pointer;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.image-with-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
