@@ -2,84 +2,86 @@
 {% block body %}
 <link rel="stylesheet" href="../static/styles.css">
 <div class="jumbotron text-center">
-  <h1> Welcome to my Picnic Table project</h1>
-  <p class="lead"> This project is not complete, but it's functional enough.</p>
-  I had orginally planned to make the light controls password protected, and I
-  might add some buttons for presets. I have other priorities right now.<p>
-  This project was partially inspired by my girlfriend's desire for an outdoor
-  table,
-  <a href="https://github.com/timothy-salazar/light_controls" target="blank">TC's light project<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
-  and my desire to make cool things, and ability to reject any idea of scope
-  control.<p>
+
+<h1> Welcome to my Picnic Table project</h1>
+<p class="lead"> This project is not complete, but it's functional enough.</p>
+I had orginally planned to make the light controls password protected, and I
+might add some buttons for presets. I have other priorities right now.<p>
+This project was partially inspired by my girlfriend's desire for an outdoor
+table,
+<a href="https://github.com/timothy-salazar/light_controls" target="blank">TC's light project<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
+and my desire to make cool things, and ability to reject any idea of scope
+control.<p>
+<p>
+I'd like to thank TC for all of his help with the lights - I literally had no
+idea what I was doing until it was done. If you have any questions about
+anything Data Science or really any cool projects I'm sure he'd love to chat.
+Try contacting him through his
+<a href="https://github.com/timothy-salazar/" target="blank">Github.<img class='new-window' src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
+I also need to thank Nick Smith and Kynan Waggoner for loaning me some
+powertools and my girlfriend Marissa for letting me borrow her garage, and
+putting up with me. <p>
+All of these people are way better than me at everything.<p>
+<p>
+Anyway, the project here was to build a picnic table (for outdoor use and
+storage) I went ahead and added the led lights to the bottom of the table
+because I thought it wood (haha) look cool. Honestly, I did a lot of extra work
+for aesthetics, and it still looks pretty bad. If you would like to replicate
+this project, the details for the table are here, and for the LEDs and website
+(also this entire site) can be found in my
+<a href="https://github.com/MasonCaiby/website" target="blank">repo.<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a><p>
+<p>
+<h3>The Table</h3>
+<div align='left'>
+I tried to take pictures as I went, but didn't do a very good job. Contact me
+with questions if you have any.<p>
+<p>
+I probably over built this and would like to stress that doing this without a
+table saw, bandsaw, and large miter saw is a huge pain. If you don't have access to
+those tools (I didn't) I would suggest using L-bracket clamps like
+<a href="https://smile.amazon.com/Knape-Vogt-Ultimate-Bracket-Titanium/dp/B002TII0JY/ref=sr_1_1?ie=UTF8&qid=1529358498&sr=8-1&keywords=KNAPE+%26+VOGT+208TI550+Hardware+Brackets" target="blank">these<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+instead of the psuedo joinery I did. If you would like to suffer and have bad
+joints, I used a skill saw with a 10" blade. If you can find a thinner one that will let
+you cut a 4x4 (don't forget about clearing the board throught the up down
+cycle of the blade), you might be better off. My blade was quite thick.<p>
   <p>
-  I'd like to thank TC for all of his help with the lights - I literally had no
-  idea what I was doing until it was done. If you have any questions about
-  anything Data Science or really any cool projects I'm sure he'd love to chat.
-  Try contacting him through his
-  <a href="https://github.com/timothy-salazar/" target="blank">Github.<img class='new-window' src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
-  I also need to thank Nick Smith and Kynan Waggoner for loaning me some
-  powertools and my girlfriend Marissa for letting me borrow her garage, and
-  putting up with me. <p>
-  All of these people are way better than me at everything.<p>
-  <p>
-  Anyway, the project here was to build a picnic table (for outdoor use and
-  storage) I went ahead and added the led lights to the bottom of the table
-  because I thought it wood (haha) look cool. Honestly, I did a lot of extra work
-  for aesthetics, and it still looks pretty bad. If you would like to replicate
-  this project, the details for the table are here, and for the LEDs and website
-  (also this entire site) can be found in my
-  <a href="https://github.com/MasonCaiby/website" target="blank">repo.<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a><p>
-  <p>
-  <h3>The Table</h3>
-  <div align='left'>
-  I tried to take pictures as I went, but didn't do a very good job. Contact me
-  with questions if you have any.<p>
-    <p>
-  I probably over built this and would like to stress that doing this without a
-  table saw, bandsaw, and large miter saw is a huge pain. If you don't have access to
-  those tools (I didn't) I would suggest using L-bracket clamps like
-  <a href="https://smile.amazon.com/Knape-Vogt-Ultimate-Bracket-Titanium/dp/B002TII0JY/ref=sr_1_1?ie=UTF8&qid=1529358498&sr=8-1&keywords=KNAPE+%26+VOGT+208TI550+Hardware+Brackets" target="blank">these<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
-  instead of the psuedo joinery I did. If you would like to suffer and have bad
-  joints, I used a skill saw with a 10" blade. If you can find a thinner one that will let
-  you cut a 4x4 (don't forget about clearing the board throught the up down
-  cycle of the blade), you might be better off. My blade was quite thick.<p>
-    <p>
-  The first step is to get all of your wood. I made my table quite large (8 feet
-  long), so I'll just go off those measurements. I used full 2x6's for the
-  tops and 4x4's for everything else. Remember that timber dimensions are nominal.
-  A standard rule of thumb is that everything over 2" shrinks by 1/2". So a 2x6
-  is really a 1.5"x5.5" and a 4x4 is really a 3.5"x3.5". Also, if you're buying lumber,
-  there's a really really good chance the boards are warped, or slightly off in
-  size. People that do this a lot will typically look down the boards while they're
-  buying them at Home Depot. I can't say anything about other lumber yards; it
-  might be bad ettiquite, like rubbing chopsticks together at a fancy Japenese
-  Restraunt. My final dimesnison were:<br>
-  <h5>Table</h5>
-  &emsp;8' long x ~34" (6 2x6s) wide x ~31.5" high .
-  <h5>Benches (x2)</h5>
-  &emsp;7' long x ~ 11" wide x ~16.5" high (you should maybe make these a few inches taller)<p>
-  <p align='center'>
-  <img src="static/table_pictures/tops.JPG" alt="Some Wood" align="left" style="height:244px; width:326px; margin:10px; border-radius:15px;"><img src="static/table_pictures/wood.JPG" alt="Some Wood" align="right" style="height:244px; width:326px; margin:10px; border-radius:15px;">If you want your table to be the same size as mine you'll need the following
-  quantities of wood, I'll also have a shopping list at the bottom of this page.
-  If you want to change the sizes, you'll have to figure out
-  your wood needs, although I suspect they won't change much unless you trim
-  your length down to 5ish feet. I used
-  <a href="https://www.homedepot.com/p/Woodguard-2-in-x-6-in-x-8-ft-2-DF-Polymer-Coated-Western-Red-Cedar-Tone-Treated-Lumber-04-77-17803/301707975" target="blank">Home Depot's Red Cedar Pressure Treated Wood<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
-  for both the tops and bottoms (except in 4x4 for the bottom / base). You shouldn't
-  need pressure treated wood, as we'll end up coating it anyway, but I believe it's
-  best practice to use it.<p>
-  <h5 align='center'>10 4x4's and 10 2x6's</h5>
-  Make sure you get the best wood you can. You'll want to make sure it's level,
-  has good edges, and is dry (or you can leave it in your girlfriend's garage for
-  3 weeks, up to you).<p>
-  <p>
-  <h3 align='center'>Building The Table</h3>
-  <b>Step 1:</b> Cut the boards to length. I added a few inches to the height of the legs,
-  as mine are a little short.<p>
-  &emsp;The most obvious step is to cut all of your 2x6's with a miter saw.<p>
-  &emsp;&emsp;You want 4 at 7' and 6 at 8'<p>
-  &emsp;You'll also need to cut the 4x4's<p>
-  <table style="width:90%;border:1px solid black;" align='center'>
+The first step is to get all of your wood. I made my table quite large (8 feet
+long), so I'll just go off those measurements. I used full 2x6's for the
+tops and 4x4's for everything else. Remember that timber dimensions are nominal.
+A standard rule of thumb is that everything over 2" shrinks by 1/2". So a 2x6
+is really a 1.5"x5.5" and a 4x4 is really a 3.5"x3.5". Also, if you're buying lumber,
+there's a really really good chance the boards are warped, or slightly off in
+size. People that do this a lot will typically look down the boards while they're
+buying them at Home Depot. I can't say anything about other lumber yards; it
+might be bad ettiquite, like rubbing chopsticks together at a fancy Japenese
+Restraunt. My final dimesnison were:<br>
+<h5>Table</h5>
+&emsp;8' long x ~34" (6 2x6s) wide x ~31.5" high .
+<h5>Benches (x2)</h5>
+&emsp;7' long x ~ 11" wide x ~16.5" high (you should maybe make these a few inches taller)<p>
+<p align='center'>
+<img src="static/table_pictures/tops.JPG" alt="Some Wood" align="left" style="height:244px; width:326px; margin:10px; border-radius:15px;"><img src="static/table_pictures/wood.JPG" alt="Some Wood" align="right" style="height:244px; width:326px; margin:10px; border-radius:15px;">If you want your table to be the same size as mine you'll need the following
+quantities of wood, I'll also have a shopping list at the bottom of this page.
+If you want to change the sizes, you'll have to figure out
+your wood needs, although I suspect they won't change much unless you trim
+your length down to 5ish feet. I used
+<a href="https://www.homedepot.com/p/Woodguard-2-in-x-6-in-x-8-ft-2-DF-Polymer-Coated-Western-Red-Cedar-Tone-Treated-Lumber-04-77-17803/301707975" target="blank">Home Depot's Red Cedar Pressure Treated Wood<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
+for both the tops and bottoms (except in 4x4 for the bottom / base). You shouldn't
+need pressure treated wood, as we'll end up coating it anyway, but I believe it's
+best practice to use it.<p>
+<h5 align='center'>10 4x4's and 10 2x6's</h5>
+Make sure you get the best wood you can. You'll want to make sure it's level,
+has good edges, and is dry (or you can leave it in your girlfriend's garage for
+3 weeks, up to you).<p>
+<p>
+<h3 align='center'>Building The Table</h3>
+<b>Step 1:</b> Cut the boards to length. I added a few inches to the height of the legs,
+as mine are a little short.<p>
+&emsp;The most obvious step is to cut all of your 2x6's with a miter saw.<p>
+&emsp;&emsp;You want 4 at 7' and 6 at 8'<p>
+&emsp;You'll also need to cut the 4x4's<p>
+
+<table style="width:90%;border:1px solid black;" align='center'>
   <td align='center' colspan=3><b>TABLE</b></td>
   <tr style='border:1px solid black;'>
     <th align='center' style='border:1px solid black;width:25%;'>Part Name</td>
@@ -107,7 +109,8 @@
     <td style='border:1px solid black; padding-left:10px;'>2</td>
     <td style='border:1px solid black; padding-left:10px;'>26.5"</td>
 </table><p>
-  <table style="width:90%;border:1px solid black;" align='center'>
+
+<table style="width:90%;border:1px solid black;" align='center'>
   <td align='center' colspan=3><b>BENCHES</b></td>
   <tr style='border:1px solid black;'>
     <th align='center' style='border:1px solid black;width:25%;'>Part Name</td>
@@ -136,28 +139,87 @@
     <td style='border:1px solid black; padding-left:10px;'>4"</td>
   </tr>
 </table><p><p>
-  <b>Step 2:</b> Make the legs<p>
-  &emsp;You're going to want to make a post on the inside corner on each leg. This
-  way you can connect your width and length boards without screwing into end grain
-  ever. The corner with the post should be the worse corner (e.g. most rounded).
-  These cuts were a huge pain with a skill saw. I ended up starting the cuts with
-  a circular saw so the skill saw had to cut less wood. The post stub thing needs
-  to be 3.5" tall (the width of a 4x4), and 2" thick/wide. This will leave 1.5"
-  for the width and length boards.<br>
+
+<h4>** You do the exact same thing for the table and benches, just with different
+  lengths of everything, the pieces that you cut out will all be the same size. **</h4>
+<p>
+<b>Step 2:</b> Make the legs<p>
+&emsp;You're going to want to make a post on the inside corner on each leg. This
+way you can connect your width and length boards without screwing into end grain
+ever. The corner with the post should be the worse corner (e.g. most rounded).
+These cuts were a huge pain with a skill saw. I ended up starting the cuts with
+a circular saw so the skill saw had to cut less wood. The post stub thing needs
+to be 3.5" tall (the width of a 4x4), and 2" thick/wide. This will leave 1.5"
+for the width and length boards.<br>
+
 <div align="center">
   <img src="static/table_pictures/just_leg_1.JPG" alt="Leg with post 1" style="height:404px; width:303px; margin:10px; border-radius:15px;">
   <img src="static/table_pictures/just_leg_2.JPG" alt="Leg with post 2" style="height:404px; width:303px; margin:10px; border-radius:15px;">
   <img src="static/table_pictures/just_leg_3.JPG" alt="Leg with post 3" style="height:404px; width:303px; margin:10px; border-radius:15px;"><p>
 </div>
 
-  <div class="container">
-    <div class="image-with-description">
-      <p class="image-description"> <b>Step 3:</b> Make the Widths These are also slightly complicated, but less so than the legs. you'll need to cut a rectangle out of each end, so the width can lay on top of the leg, and beside the post. You'll want the part that sticks out to be 3.5" long and 1.5" wide.
-      <img src="static/table_pictures/width_to_be_cut.JPG" alt="Leg with post 1" style="height:244px; width:326px; margin:10px; border-radius:15px;">
-    </div>
+<div class="container">
+  <div class="image-with-description">
+    <p class="image-description"> <b>Step 3:</b> Make the Widths <br>
+      These are also slightly complicated, but less so than the legs. you'll
+      need to cut a rectangle out of each end, so the width can lay on top of the
+       leg, and beside the post. You'll want the part that sticks out to be <b>3.5"
+       long</b> and <b>1.5" wide</b>. I honestly think the picture describes it much better
+       than I can with wordies. You need to make sure the rectangles you take
+       out are on the same side of the board, and you'll want to leave the two
+       best corners, the side opposite of the rectangle you take out (e.g. the
+       one on the ground in this pic) will be the display side.</p>
+    <img src="static/table_pictures/width_to_be_cut.JPG" align='right' alt="Leg with post 1" style="height:244px; width:326px; margin:10px; border-radius:15px;">
   </div>
+</div>
 
-text
-  <p>
+<b>Step 4:</b> Make the Lengths <br>
+These are almost the exact same as the lengths, except the rectange you take out
+should be <b>2" long</b> and <b>1.5" wide</b>. When you put the lengths and widths
+together,you'll have a little <b>2" square</b> missing from the joint. They'll
+look like this (but hopefully flush):
+
+<div align="center">
+  <img src="static/table_pictures/top_no_leg_1.JPG" alt="Top down view, without a leg 1" style="height:404px; width:303px; margin:10px; border-radius:15px;">
+  <img src="static/table_pictures/top_no_leg_3.JPG" alt="Top down view, without a leg 2" style="height:303; width:404px; margin:10px; border-radius:15px;"><p>
+</div>
+
+<b>Step 5:</b> Build the Base <br>
+This part can be tricky, you need to asseble the whole thing. You want to make
+sure you get all of your pieces together as tightly as possible, with right angles
+between everything. I don't have some secret family trick for this, just a speed
+square. I started by putting the widths onto the legs, then connecting the lengths.
+It might be smarter to connect the lengths and widths with
+<a href='https://www.homedepot.com/p/The-Hillman-Group-3-1-2-x-3-4-in-Zinc-Plated-Corner-Brace-5-Pack-851129-0/203809826?cm_mmc=Shopping%7CG%7CBase%7CD25H%7C25-4_BUILDERS_HARDWARE%7CNA%7CPLA%7c71700000035978695%7c58700004046980559%7c92700033074575149&gclid=CjwKCAjwj4zaBRABEiwA0xwsP_ZH1UyliK2XI6eFKtIN6NUC-c_ZuE3qRsIcvDnJsta22uyUlx9rYhoClzEQAvD_BwE&dclid=CIzoze-Lk9wCFYmraQodzPsC8Q' target="blank">L-braces<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>, then out the legs into each. Up to you.<p>
+<p>
+Once assembled, everything should look like this, except not painted:<br>
+
+<div align="center">
+<img src="static/table_pictures/table_no_top.JPG" alt="Table without the top." style="height:410px; width:606px;  margin:10px; border-radius:15px;">
+</div>
+<p>
+
+Ok sweet, you did the hard parts.<p>
+
+<div class="container">
+  <div class="image-with-description">
+    <p class="image-description"> <b>(Optional) Step 6:</b> Add L braces
+I added L-braces to the table, my legs had a little play I didn't like. I don't
+think it'll make a difference when you add these (I put them on after I painted,
+then painted over them).</p>
+<img src="static/table_pictures/table_with_l_braces.JPG" alt="Top down view, without a leg 2" style="height:326; width:244px; margin:10px; border-radius:15px;"><br>
+  </div>
+</div><p>
+
+<b>Step 7:</b> Paint the Base <br>
+I used
+<a href="https://www.zoro.com/rust-oleum-enamel-alkyd-black-flat-7776502/i/G9973765/feature-product?gclid=CjwKCAjwj4zaBRABEiwA0xwsP2Kk4mm-aYLHHsQOSUS1ePTLjF8rMco28t2wgTnr8zvlCBc1YR3dyRoCm34QAvD_BwE" target="black">Rust-Olem Matte Black<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+paint, since it will help waterproof the bases. I also like matte black things.
+You should use a nicer quality brush, and definetly need to buy (or have) some
+Mineral Spirits around to clean up after yourself, since it's waterproof paint
+you can't just wash it off.
+
+
+
 </div>
 {% endblock %}
