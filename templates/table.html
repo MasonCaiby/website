@@ -199,13 +199,13 @@ Once assembled, everything should look like this, except not painted:<br>
 </div>
 <p>
 
-Ok sweet, you did the hard parts.<p>
+<p>
 
 <div class="container">
   <div class="image-with-description">
     <p class="image-description"> <b>(Optional) Step 6:</b> Add L braces
 I added L-braces to the table, my legs had a little play I didn't like. I don't
-think it'll make a difference when you add these (I put them on after I painted,
+think it'll make a difference when in the painting process you add these (I put them on after I painted,
 then painted over them).</p>
 <img src="static/table_pictures/table_with_l_braces.JPG" alt="Top down view, without a leg 2" style="height:326; width:244px; margin:10px; border-radius:15px;"><br>
   </div>
@@ -216,9 +216,85 @@ I used
 <a href="https://www.zoro.com/rust-oleum-enamel-alkyd-black-flat-7776502/i/G9973765/feature-product?gclid=CjwKCAjwj4zaBRABEiwA0xwsP2Kk4mm-aYLHHsQOSUS1ePTLjF8rMco28t2wgTnr8zvlCBc1YR3dyRoCm34QAvD_BwE" target="black">Rust-Olem Matte Black<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
 paint, since it will help waterproof the bases. I also like matte black things.
 You should use a nicer quality brush, and definetly need to buy (or have) some
-Mineral Spirits around to clean up after yourself, since it's waterproof paint
-you can't just wash it off.
+<a href='https://www.homedepot.com/p/Klean-Strip-1-gal-Odorless-Mineral-Spirits-GKSP94006P/100147127' target='blank'>Mineral Spirits<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+around to clean up after yourself, since it's waterproof paint
+you can't just wash it off.<p>
 
+<b>Step 8:</b> Finish the Tops <br>
+I used a sealing outdoor finish, in a semi-gloss. Full Gloss finishes will show
+scratches more than the less glossy options. I like wood, and how it looks, so
+I used a <a href='https://www.amazon.com/Minwax-63200444-Helmsman-Urethane-quart/dp/B000Y4II3I/ref=asc_df_B000Y4II3I/?tag=hyprod-20&linkCode=df0&hvadid=193184886406&hvpos=1o1&hvnetw=g&hvrand=1737663101168751547&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9028818&hvtargid=pla-308030795174&psc=1' target='blank'>transparent finish<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
+Again, you'll want a nice brush and a bucket of Mineral Spirits to put the brush in
+between coats. I did 3 coats total, sanding between the coats. I also did one coat
+on the sides and bottom of the boards to help with waterproofing. I let the finish
+drip down the sides as I applied it to the tops for the extra coats to add some
+character (not because I was lazy).<p>
+
+<b>Step 9:</b> Add supports <br>
+You'll have to figure out your own measurements for these, any warping in your 4x4's
+will affect the length of the supports we're about to add. You can make these while your
+finish dries. I added two supports to each bench and the table (so 6 total). I
+just measured the gap where I wanted to add the support and cut some of the 4x4
+drops I had to size. You'll paint these black too. The supports for the table will
+be on each side of the electronics box, to help add some protection to it. I got
+some
+<a href='https://www.homedepot.com/p/Everbilt-6-in-Steel-Zinc-Plated-Mending-Plate-13616/203170046' target='blank'>flat braces<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+to use to attach the supports to the table with. The 6-8 inch ones will let you use
+1 brace for each support on the bench.<p>
+
+<b>Step 10:</b> Put the tops on<br>
+Just screw all of the 2x6's onto the bases. If you're going to have space between
+the boards, I would use a spacer (e.g. popsicle sticks) to make sure everything is
+consistent. We'll put the supports onto the table and benches once we make the
+electronics box.
+
+<h3 align='center'>Building The Electronis box</h3>
+
+<b>Step 1:</b> Get all of the componets<br>
+You'll need a lot of things to get this to work. Here's an
+<a href='https://www.amazon.com/ideas/amzn1.account.AHE5E3Z7HPCLWBWF3ULIS5B35MOA/11Z8EILYN51B4' target='blank'>Amazon shopping list<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.<p>
+<p>
+
+<b>Step 2:</b> Setup your Raspberry Pi<br>
+Get an <a href='https://www.raspberrypi.org/documentation/installation/installing-images/' target='blank'>image of Raspbian<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+ onto your SD Card.<p>
+Setup <a href='https://www.raspberrypi.org/documentation/remote-access/ssh/' target='blank'>SSH on your pi<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.<p>
+Configure your Raspberry Pi's wifi. You can do this from a laptop when you are
+adding the <a href='https://www.raspberrypi.org/forums/viewtopic.php?t=191252' target='blank'>image to the SD card<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+, or from the Pi (with a keyboard and mouse) once
+you have <a href='https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md' target='blank'>booted the pi<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
+<p>
+
+<b>Step 3:</b> SSH into the Raspberry Pi<br>
+Go ahead and SSH into your raspberry pi <pre width="30">ssh pi@raspberrypi.local</pre>
+The default user is pi , and the password is raspberry.<p>
+<p>
+<b>Step 4:</b> Install some more things onto the Pi<br>
+<pre width="30">sudo apt-get update
+sudo apt-get install python-pip
+sudo apt-get install git
+pip install numpy
+pip install Flask
+pip install pigpio
+
+wget abyz.co.uk/rpi/pigpio/pigpio.zip
+unzip pigpio.zip
+cd PIGPIO
+make
+make install
+
+git clone https://github.com/MasonCaiby/website.git
+</pre>
+
+You really only need one page from the repo above, and can hack away the rest of
+the website if you so desire.<p>
+<p>
+<b>Step 5:</b> Setup the the electronics<br>
+You should follow <a href='https://dordnung.de/raspberrypi-ledstrip/' target='blank'>David Ordnung's<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+blog post to get the basics setup. I followed his tutorial and would be referring
+to it to write another one.<p>
+<p>
+<b>Step 6:</b> Move everything into a waterproof electronics box<br>  
 
 
 </div>

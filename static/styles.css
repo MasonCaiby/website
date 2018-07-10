@@ -122,5 +122,10 @@ a:hover {
   justify-content: right;
   align-items: center;
   margin:0px;
+}
 
+.center-ol {
+  text-align: center;
+  list-style-position: inside;
+  margin: -10px;
 }
