@@ -5,13 +5,17 @@ import numpy as np
 import os
 import time
 from helpers import fade_colors
+from flask_basicauth import BasicAuth
 
 
 app = Flask(__name__)
 app.debug = True
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
+app.config['BASIC_AUTH_USERNAME'] = 'john'
+app.config['BASIC_AUTH_PASSWORD'] = 'matrix'
 
+basic_auth = BasicAuth(app)
 
 def startup_pigpio():
     global pi1
@@ -60,6 +64,11 @@ def wildlife():
 @app.route('/handler')
 def handler():
     return render_template('handler.html')
+
+@app.route('/test')
+@basic_auth.required
+def test():
+    return render_template('test.html')
 
 
 @app.route('/table')

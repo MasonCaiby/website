@@ -8,7 +8,7 @@
 
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+  <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item {% if  request.endpoint == "index" %}custom-active{% endif %} navbar-custom:hover">
         <a class="nav-link {% if  request.endpoint == "index" %}custom-active-text{% endif %}" href="/" style="text-decoration: none">Home<span class="sr-only">(current)</span></a>
@@ -23,7 +23,7 @@
         <a class="nav-link {% if  request.endpoint == "light_controls" %}custom-active-text{% endif %}" href="/controls" style="text-decoration: none">Controls</a>
       </li>
       <li class="projects dropdown {% if  request.endpoint in ["wildlife", "handler", "table"] %}custom-active{% endif %}">
-          <a class="nav-link dropdown-toggle {% if  request.endpoint in ["wildlife", "handler", "table"] %}custom-active-text{% endif %}" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none">Projects</a>
+          <a class="nav-link dropdown-toggle {% if  request.endpoint in ["wildlife", "handler", "table"] %}custom-active-text{% endif %}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none">Projects</a>
           <div class="dropdown-menu " aria-labelledby="dropdown01">
             <a class="dropdown-item {% if  request.endpoint == "wildlife" %}custom-active{% endif %}" href="/wildlife" style="text-decoration: none">Wildlife Detection</a>
             <a class="dropdown-item {% if  request.endpoint == "handler" %}custom-active{% endif %}" href="/handler" style="text-decoration: none">SO Handler</a>
