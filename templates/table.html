@@ -253,6 +253,9 @@ electronics box.
 <b>Step 1:</b> Get all of the componets<br>
 You'll need a lot of things to get this to work. Here's an
 <a href='https://www.amazon.com/ideas/amzn1.account.AHE5E3Z7HPCLWBWF3ULIS5B35MOA/11Z8EILYN51B4' target='blank'>Amazon shopping list<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.<p>
+If you want to make everything neat you'll need to get a bigger electronics box.
+Also, I couldn't find strain reliefs for the LED strips that fit well. If you do,
+please send a link my way.
 <p>
 
 <b>Step 2:</b> Setup your Raspberry Pi<br>
@@ -295,7 +298,43 @@ blog post to get the basics setup. I followed his tutorial and would be referrin
 to it to write another one.<p>
 <p>
 <b>Step 6:</b> Move everything into a waterproof electronics box<br>
-
-
+<ol>
+  <li>Cut a hole in the end of the box for the power cord's strain relief to go
+    through. You will then put the strain relief on, cut the power cord close to
+    female side, and thread the cord into the box. Then use the slim wire nuts to
+    reconnect the wires.
+    <div align="center">
+      <img src="static/table_pictures/wire_nuts_1.JPG" alt="Wire Nuts 1" style="height:326px; width:244px; margin:10px; border-radius:15px;">
+      <img src="static/table_pictures/wire_nuts_2.JPG" alt="Wire Nuts 2" style="height:326px; width:244px; margin:10px; border-radius:15px;">
+      <p>
+    </div></li>
+  <li> Now insert the wires for your pi's GPIO pins through the case's top (if
+    that's how you want them handled). and put the pi in the case.
+    <div align="center">
+      <img src="static/table_pictures/raspberry_pi.JPG" alt="GPIO PINS" style="height:326px; width:244px; margin:10px; border-radius:15px;">
+      <img src="static/table_pictures/cover.JPG" alt="Cover with wires" style="height:326px; width:244px; margin:10px; border-radius:15px;">
+      <p>
+    </div></li>
+  <li> Cut two holes in either side of the box for the LED strips' strain
+      reliefs to go through. Put the LEDs into the strain reliefs and tighten them
+      down.</li>
+  <li> Finally wire everything thing up, and shove them in the box. My box was a
+  little small for all of my components, <s>so I ended up with a messy box</s> wow
+  everything is so neat and tidy in there, too bad I forgot to take a picture.</li>
+</ol>
+<h3 align='center'>Putting it all together</h3>
+Now you just need to screw the box onto the table, glue the LED strips on, and plug
+it in. If you have your pi set up to connect to your router on boot up and SSH
+enabled, you just need to plug the main power cord in, wait a minute, SSH in, start
+the pigpio demon <pre width="30" style="display: inline;">sudo pigpiod </pre> and
+<pre width="30" style="display: inline;">python app.py</pre> I run my app.py in
+a tmux instance so I can still access the pi's command line w/o interrupting the
+website <pre width="30" style="display: inline;">tmux new -s website</pre>. In
+the end your table should look like this:
+<div align="center">
+  <img src="static/table_pictures/table.JPG" alt="Table no lights" style="height:326px; width:244px; margin:10px; border-radius:15px;">
+  <img src="static/table_pictures/lit_table.JPG" alt="light table" style="height:326px; width:244px; margin:10px; border-radius:15px;">
+  <p>
+</div>
 </div>
 {% endblock %}
