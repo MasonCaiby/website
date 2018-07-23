@@ -2,7 +2,6 @@ from flask import Flask, request, session, g, url_for, \
     render_template, flash
 import pigpio
 import numpy as np
-import pandas as pd
 import os
 import time
 from helpers import fade_colors
@@ -20,9 +19,6 @@ with open('lights_login.csv', 'r') as pass_file:
     login_info = login_info.split(',')
     username = login_info[0]
     password = login_info[1]
-# lights_login = pd.read_csv('lights_login.csv')
-# username = lights_login[0]
-# password = lights_login[1]
 app.config['BASIC_AUTH_USERNAME'] = username
 app.config['BASIC_AUTH_PASSWORD'] = password
 basic_auth = BasicAuth(app)
