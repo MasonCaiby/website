@@ -2,6 +2,7 @@ from flask import Flask, request, session, g, url_for, \
     render_template, flash
 import pigpio
 import numpy as np
+import pandas as pd
 import os
 import time
 from helpers import fade_colors
@@ -12,10 +13,21 @@ app = Flask(__name__)
 app.debug = True
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
-app.config['BASIC_AUTH_USERNAME'] = 'john'
-app.config['BASIC_AUTH_PASSWORD'] = 'matrix'
 
+# password protected info for lights_control
+with open('lights_login.csv', 'r') as pass_file:
+    login_info = pass_file.read()
+    login_info = login_info.split(',')
+    username = login_info[0]
+    password = login_info[1]
+# lights_login = pd.read_csv('lights_login.csv')
+# username = lights_login[0]
+# password = lights_login[1]
+app.config['BASIC_AUTH_USERNAME'] = username
+app.config['BASIC_AUTH_PASSWORD'] = password
 basic_auth = BasicAuth(app)
+
+
 
 def startup_pigpio():
     global pi1
@@ -77,6 +89,7 @@ def table():
 
 
 @app.route('/controls', methods=['GET', 'POST'])
+@basic_auth.required
 def light_controls():
     # safely try to get the current values of the GPIO Pins. If multiple people
     # are controlling the table, it pulls the current value every time they
