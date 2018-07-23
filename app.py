@@ -14,6 +14,8 @@ app.debug = True
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 
 # password protected info for lights_control
+## TODO: salt and hash password/username
+
 with open('lights_login.csv', 'r') as pass_file:
     login_info = pass_file.read()
     login_info = login_info.split(',')
@@ -22,17 +24,6 @@ with open('lights_login.csv', 'r') as pass_file:
 app.config['BASIC_AUTH_USERNAME'] = username
 app.config['BASIC_AUTH_PASSWORD'] = password
 basic_auth = BasicAuth(app)
-
-
-
-# def startup_pigpio():
-#     global pi1
-#     os.system('sudo /home/pi/website/startup_commands.sh')
-#     time.sleep(1)
-#     pi1 = pigpio.pi()
-#     pi1.set_PWM_dutycycle(17, 0)
-#     pi1.set_PWM_dutycycle(27, 0)
-#     pi1.set_PWM_dutycycle(22, 0)
 
 
 # don't cache css
@@ -73,6 +64,7 @@ def wildlife():
 def handler():
     return render_template('handler.html')
 
+
 @app.route('/test')
 @basic_auth.required
 def test():
@@ -90,7 +82,7 @@ def light_controls():
     # safely try to get the current values of the GPIO Pins. If multiple people
     # are controlling the table, it pulls the current value every time they
     # load it. I could move this into the html so people get live updates
-    # TODO: move into html for live update.
+    ## TODO: move into html for live update.
 
     try:
         r = pi1.get_PWM_dutycycle(17)
