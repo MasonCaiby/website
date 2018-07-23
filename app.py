@@ -25,14 +25,14 @@ basic_auth = BasicAuth(app)
 
 
 
-def startup_pigpio():
-    global pi1
-    os.system('sudo /home/pi/website/startup_commands.sh')
-    time.sleep(1)
-    pi1 = pigpio.pi()
-    pi1.set_PWM_dutycycle(17, 0)
-    pi1.set_PWM_dutycycle(27, 0)
-    pi1.set_PWM_dutycycle(22, 0)
+# def startup_pigpio():
+#     global pi1
+#     os.system('sudo /home/pi/website/startup_commands.sh')
+#     time.sleep(1)
+#     pi1 = pigpio.pi()
+#     pi1.set_PWM_dutycycle(17, 0)
+#     pi1.set_PWM_dutycycle(27, 0)
+#     pi1.set_PWM_dutycycle(22, 0)
 
 
 # don't cache css
@@ -120,6 +120,6 @@ def light_controls():
 
 
 if __name__ == '__main__':
-    #startup_pigpio()
+    # startup_pigpio()
 
     app.run()
