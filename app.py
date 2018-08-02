@@ -5,8 +5,8 @@ import numpy as np
 import os
 import time
 from helpers import fade_colors
-from flask_basicauth import BasicAuth
-
+# from flask_basicauth import BasicAuth
+from basic_auth_edited import BasicAuth
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ with open('lights_login.csv', 'r') as pass_file:
     password = login_info[1]
 app.config['BASIC_AUTH_USERNAME'] = username
 app.config['BASIC_AUTH_PASSWORD'] = password
-basic_auth = BasicAuth(app)
+basic_auth = BasicAuth(app, failed_login='failed_login.html')
 
 
 # don't cache css
@@ -42,7 +42,6 @@ def add_header(r):
 @app.route('/')
 def index():
     return render_template('home.html')
-
 
 @app.route('/climbing')
 def climbing():
