@@ -1,0 +1,60 @@
+<!-- Save this file in the templates folder with whatever_name you_want.html -->
+<head>
+  <meta charset="UTF-8">
+</head>
+{% extends 'layout.html' %}
+{% block body %}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../static/styles.css">
+<div class="jumbotron text-center">
+
+<h1>Auto App</h1>
+
+<p class="lead"> Here's the
+<a href="https://github.com/MasonCaiby/auto_app" target='blank' style="color:#22e490;">Github Link<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>.
+So this project is a mixture of cool and silly. To quote my...
+IDK... friend (?) Phil:
+<center>
+  <blockquote class="w3-panel w3-leftbar w3-sand" style='text-align:center; width:400px; padding-top:10px;'><p>
+<span style="font-size:30px;line-height:0.6em;opacity:0.5">&#10077; </span>
+  you’ve made a bot. congratulations 🎉
+</blockquote>
+</center>
+</p>
+<p>
+So, if it hasn't been made clear enough, I'm currently looking for a job in
+Data Science - ideally Machine Learning / Deep Learning / Computer Vision -
+that shit's cool. Anyway, this project was an attempt to streamline the job
+application project. It exclusively works with AngelList, their application process
+is extremly streamlined. Applying to jobs on other sites would quickly become a
+game of "how many different boxes/labels are there".</p>
+
+<p style="margin:0px; padding:0px;">
+So this project starts a
+<a href="https://www.seleniumhq.org/" target='blank' style="color:#22e490;">Selenium<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+driver, navigates to AngelList, logs in, navigates to a URL that should include
+your desired filters, and applies to all the jobs on the page. It works, pretty
+well. Something I've learned trying to automate Web Browsing is that there are
+too many variables and too many little changes for something to be 100% robust.
+
+  <center style="margin:0px; padding:0px;"><div style="margin:0px; width:90%; text-align:center; color:gray; padding:0px;">
+<font size="5">E.G.</font> you have to wait for a pop-up window to open before you can interact with
+it (duh). But how long do you wait? 5 seconds? 10? 2? For this application, 2
+seconds seemed to work 99% of the time, I didn't want to wait the extra 3 seconds
+for 1% more accuracy so I set it to 2. But, sometimes, it breaks because the site
+hasn't loaded the popup yet. I could wrap it in a try/except but there are a ton
+of possible issues you can hit. This was just an example.</div></center>
+<br>
+It also pulls the recruiters name (if there is one, otherwise it says "Dear
+Hiring Manager"). I also implemented some A/B testing. Every other job application
+gets the same 'cover letter' so the even numbered job apps get one that says
+it was applied to with a script, the odd numbered ones don't talk about the script.
+I'll post my results in awhile, once some more come in.
+
+Yeah, I think that's pretty much it. Watch this video if you're still curious
+(it's in real time):</p>
+
+<iframe src="https://player.vimeo.com/video/282698022" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+{% endblock %}

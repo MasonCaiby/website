@@ -76,6 +76,16 @@ def table():
     return render_template('table.html')
 
 
+@app.route('/website')
+def website():
+    return render_template('website.html')
+
+
+@app.route('/auto_app')
+def auto_app():
+    return render_template('auto_app.html')
+
+
 @app.route('/controls', methods=['GET', 'POST'])
 @basic_auth.required
 def light_controls():
