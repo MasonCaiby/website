@@ -9,7 +9,6 @@ from flask_basicauth import BasicAuth
 
 
 app = Flask(__name__)
-app.debug = True
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 
@@ -124,4 +123,4 @@ def light_controls():
 if __name__ == '__main__':
     # startup_pigpio()
 
-    app.run()
+    app.run(host='0.0.0.0', threaded=True, port=5000)
