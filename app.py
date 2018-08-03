@@ -120,6 +120,10 @@ def light_controls():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
+    startup_pigpio()
+=======
     # startup_pigpio()
+>>>>>>> b60141c32a3426c197bc2425fa4cf93909b1ec4b
 
     app.run(host='0.0.0.0', threaded=True, port=5000)
