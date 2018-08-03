@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block body %}
+<link rel="stylesheet" href="static/styles.css">
+<div class="jumbotron text-center">
+<meta name="viewport" content="linitial-scale=auto">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<h1> Bad Login Creds</h1>
+<p class='lead'>
+  Here is a preview of the light controls page, without the ability to post</p>
+	<h2>LED Controls</h2>
+  <div align="center">
+  <div class="w3-container w3-cell">
+			<dl>
+        Current Color:
+        <div style="background-color: rgb({{r_value}}, {{g_value}}, {{b_value}}) ; padding: 10px; border:1px solid #000000; height:100px; width:100px;"></div>
+			</dl>
+	</div>
+	<div class="w3-container w3-cell">
+		<form action="{{ url_for('light_controls') }}" method="post" class="light_control" autocomplete="off" id="form1">
+			<dl>
+				Red Value:
+				<div class="slidecontainer">
+					<dd><input type="range" name="red" min="0" max="255" value={{r_value}} class="red-slider" id="red_range"><p>
+					Value: <span id="red_output"></span>
+				</div>
+				Green Value:
+				<div class="slidecontainer">
+					<dd><input type="range" name="green" min="0" max="255" value={{g_value}} class="green-slider" id="green_range"><p>
+					Value: <span id="green_output"></span>
+				</div>
+				Blue Value:
+				<div class="slidecontainer">
+					<dd><input type="range" name="blue" min="0" max="255" value={{b_value}} class="blue-slider" id="blue_range"><p>
+					Value: <span id="blue_output"></span>
+				</div>
+				<dd>
+			</dl>
+		</form>
+	</div>
+	<div class="w3-container w3-cell">
+			<dl>
+        New Color
+				<dd><canvas id="my_canvas" width="100" height="100"
+				style="border:1px solid #000000;">
+				</canvas>
+			</dl>
+	</div>
+</div>
+
+
+
+	<script>
+	var red_slider = document.getElementById("red_range");
+	var red_output = document.getElementById("red_output");
+	var green_slider = document.getElementById("green_range");
+	var green_output = document.getElementById("green_output");
+	var blue_slider = document.getElementById("blue_range");
+	var blue_output = document.getElementById("blue_output");
+	red_output.innerHTML = red_slider.value;
+	green_output.innerHTML = green_slider.value;
+	blue_output.innerHTML = blue_slider.value;
+	red_slider.onchange = function() {
+		red_output.innerHTML = this.value;
+		myFunction()
+	}
+	blue_slider.oninput = function() {
+		blue_output.innerHTML = this.value;
+		myFunction()
+	}
+	green_slider.oninput = function() {
+		green_output.innerHTML = this.value;
+		myFunction()
+	}
+	function myFunction() {
+		var canvas = document.getElementById("my_canvas");
+		var ctx = canvas.getContext("2d");
+		var my_colors = 'rgb('+red_slider.value+','+green_slider.value+','+blue_slider.value+')';
+		ctx.fillStyle = my_colors;
+		ctx.fillRect(0,0,canvas.width,canvas.height);
+	}
+	myFunction()
+	</script>
+{% endblock %}

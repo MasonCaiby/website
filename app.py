@@ -5,15 +5,16 @@ import numpy as np
 import os
 import time
 from helpers import fade_colors
-from flask_basicauth import BasicAuth
-
+# from flask_basicauth import BasicAuth
+from basic_auth_edited import BasicAuth
 
 app = Flask(__name__)
-app.debug = True
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 
 # password protected info for lights_control
+## TODO: salt and hash password/username
+
 with open('lights_login.csv', 'r') as pass_file:
     login_info = pass_file.read()
     login_info = login_info.split(',')
@@ -21,18 +22,7 @@ with open('lights_login.csv', 'r') as pass_file:
     password = login_info[1]
 app.config['BASIC_AUTH_USERNAME'] = username
 app.config['BASIC_AUTH_PASSWORD'] = password
-basic_auth = BasicAuth(app)
-
-
-
-def startup_pigpio():
-    global pi1
-    os.system('sudo /home/pi/website/startup_commands.sh')
-    time.sleep(1)
-    pi1 = pigpio.pi()
-    pi1.set_PWM_dutycycle(17, 0)
-    pi1.set_PWM_dutycycle(27, 0)
-    pi1.set_PWM_dutycycle(22, 0)
+basic_auth = BasicAuth(app, failed_login='failed_login.html')
 
 
 # don't cache css
@@ -53,7 +43,6 @@ def add_header(r):
 def index():
     return render_template('home.html')
 
-
 @app.route('/climbing')
 def climbing():
     return render_template('climbing.html')
@@ -73,6 +62,7 @@ def wildlife():
 def handler():
     return render_template('handler.html')
 
+
 @app.route('/test')
 @basic_auth.required
 def test():
@@ -84,13 +74,23 @@ def table():
     return render_template('table.html')
 
 
+@app.route('/website')
+def website():
+    return render_template('website.html')
+
+
+@app.route('/auto_app')
+def auto_app():
+    return render_template('auto_app.html')
+
+
 @app.route('/controls', methods=['GET', 'POST'])
 @basic_auth.required
 def light_controls():
     # safely try to get the current values of the GPIO Pins. If multiple people
     # are controlling the table, it pulls the current value every time they
     # load it. I could move this into the html so people get live updates
-    # TODO: move into html for live update.
+    ## TODO: move into html for live update.
 
     try:
         r = pi1.get_PWM_dutycycle(17)
@@ -120,6 +120,10 @@ def light_controls():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     startup_pigpio()
+=======
+    # startup_pigpio()
+>>>>>>> b60141c32a3426c197bc2425fa4cf93909b1ec4b
 
-    app.run()
+    app.run(host='0.0.0.0', threaded=True, port=5000)

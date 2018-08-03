@@ -14,7 +14,7 @@ def convert_colors(image_path, new_value, verbose=False, save_file=False):
             if np.all(pixel[:3] <= [250, 250,  250]):
                 arr[i, j] = new_value
             else:
-                arr[i, j] = [255,255,255,0]
+                arr[i, j] = [255, 255, 255, 0]
     if verbose:
         plt.imshow(arr, interpolation='nearest')
     if save_file:
