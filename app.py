@@ -15,6 +15,8 @@ app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 # password protected info for lights_control
 ## TODO: salt and hash password/username
 
+pi1 = pigpio.pi()
+
 with open('lights_login.csv', 'r') as pass_file:
     login_info = pass_file.read()
     login_info = login_info.split(',')
