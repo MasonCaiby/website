@@ -91,7 +91,9 @@ def light_controls():
     # are controlling the table, it pulls the current value every time they
     # load it. I could move this into the html so people get live updates
     ## TODO: move into html for live update.
-
+    r = 0
+    g = 0
+    b = 0
     try:
         r = pi1.get_PWM_dutycycle(17)
         g = pi1.get_PWM_dutycycle(27)
