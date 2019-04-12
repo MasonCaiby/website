@@ -1,11 +1,7 @@
 from flask import Flask, request, session, g, url_for, \
     render_template, flash
-import pigpio
 import numpy as np
-import os
-import time
 from helpers import fade_colors
-# from flask_basicauth import BasicAuth
 from basic_auth_edited import BasicAuth
 
 app = Flask(__name__)
@@ -15,7 +11,7 @@ app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 # password protected info for lights_control
 ## TODO: salt and hash password/username
 
-pi1 = pigpio.pi()
+# pi1 = pigpio.pi()
 
 with open('lights_login.csv', 'r') as pass_file:
     login_info = pass_file.read()
@@ -85,6 +81,14 @@ def website():
 def auto_app():
     return render_template('auto_app.html')
 
+@app.route('/compare_grades')
+def compare_grades():
+    return render_template('compare_grades.html')
+
+@app.route('/compare_grades_full')
+def compare_grades_full():
+    return render_template('compare_grades_full.html')
+
 
 @app.route('/controls', methods=['GET', 'POST'])
 @basic_auth.required
@@ -93,32 +97,32 @@ def light_controls():
     # are controlling the table, it pulls the current value every time they
     # load it. I could move this into the html so people get live updates
     ## TODO: move into html for live update.
-    r = 0
-    g = 0
-    b = 0
-    try:
-        r = pi1.get_PWM_dutycycle(17)
-        g = pi1.get_PWM_dutycycle(27)
-        b = pi1.get_PWM_dutycycle(22)
-    except AttributeError:
-        r = 0
-        g = 0
-        b = 0
-    except:
-        print(Exception)
-
-    if request.method == 'POST':
-        try:
-            new_colors = np.array([request.form['red'], request.form['green'],
-                                  request.form['blue']])
-            new_colors = new_colors.astype('int')
-            assert (np.all(new_colors < 256) and np.all(new_colors >= 0))
-            fade_colors(pi1, np.array([r, g, b]), new_colors, [17, 27, 22])
-            r = pi1.get_PWM_dutycycle(17)
-            g = pi1.get_PWM_dutycycle(27)
-            b = pi1.get_PWM_dutycycle(22)
-        except (ValueError, AssertionError):
-            flash('You need to type a value between 0 and 255 for all boxes')
+    # r = 0
+    # g = 0
+    # b = 0
+    # try:
+    #     r = pi1.get_PWM_dutycycle(17)
+    #     g = pi1.get_PWM_dutycycle(27)
+    #     b = pi1.get_PWM_dutycycle(22)
+    # except AttributeError:
+    #     r = 0
+    #     g = 0
+    #     b = 0
+    # except:
+    #     print(Exception)
+    #
+    # if request.method == 'POST':
+    #     try:
+    #         new_colors = np.array([request.form['red'], request.form['green'],
+    #                               request.form['blue']])
+    #         new_colors = new_colors.astype('int')
+    #         assert (np.all(new_colors < 256) and np.all(new_colors >= 0))
+    #         fade_colors(pi1, np.array([r, g, b]), new_colors, [17, 27, 22])
+    #         r = pi1.get_PWM_dutycycle(17)
+    #         g = pi1.get_PWM_dutycycle(27)
+    #         b = pi1.get_PWM_dutycycle(22)
+    #     except (ValueError, AssertionError):
+    #         flash('You need to type a value between 0 and 255 for all boxes')
     return render_template('light_controls.html', r_value=r, g_value=g,
                             b_value=b)
 
