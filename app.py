@@ -81,15 +81,18 @@ def website():
 def auto_app():
     return render_template('auto_app.html')
 
+# a page with a description etc.
 @app.route('/compare_grades')
 def compare_grades():
     return render_template('compare_grades.html')
 
+# the full html page.
 @app.route('/compare_grades_full')
 def compare_grades_full():
     return render_template('compare_grades_full.html')
 
-
+# this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
+# an ok example of authentication
 @app.route('/controls', methods=['GET', 'POST'])
 @basic_auth.required
 def light_controls():
