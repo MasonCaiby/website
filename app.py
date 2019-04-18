@@ -4,6 +4,8 @@ import numpy as np
 from helpers import fade_colors
 from basic_auth_edited import BasicAuth
 
+import sys,os
+
 app = Flask(__name__)
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
@@ -131,5 +133,5 @@ def light_controls():
 
 
 if __name__ == '__main__':
-    
-    app.run(host='0.0.0.0', threaded=True, port=5000)
+    sys.path.append(os.path.realpath('..'))
+    app.run(host='0.0.0.0', threaded=True, port=80)
