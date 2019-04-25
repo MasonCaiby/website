@@ -1,5 +1,5 @@
 from flask import Flask, request, session, g, url_for, \
-    render_template, flash
+    render_template, flash, redirect
 import numpy as np
 from helpers import fade_colors
 from basic_auth_edited import BasicAuth
@@ -61,12 +61,6 @@ def handler():
     return render_template('handler.html')
 
 
-@app.route('/test')
-@basic_auth.required
-def test():
-    return render_template('test.html')
-
-
 @app.route('/table')
 def table():
     return render_template('table.html')
@@ -81,15 +75,29 @@ def website():
 def auto_app():
     return render_template('auto_app.html')
 
+
 # a page with a description etc.
 @app.route('/compare_grades')
 def compare_grades():
     return render_template('compare_grades.html')
 
+
 # the full html page.
 @app.route('/compare_grades_full')
 def compare_grades_full():
     return render_template('compare_grades_full.html')
+
+
+@app.route('/baking', methods=['GET', 'POST'])
+def baking():
+    if request.method == 'POST':
+        print(request.form.keys())
+        return redirect(url_for('add_recipe'))
+    return render_template('baking.html')
+
+@app.route('/add_recipe', methods=['GET', 'POST'])
+def add_recipe():
+    return render_template('add_recipe.html')
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication
@@ -100,9 +108,9 @@ def light_controls():
     # are controlling the table, it pulls the current value every time they
     # load it. I could move this into the html so people get live updates
     ## TODO: move into html for live update.
-    # r = 0
-    # g = 0
-    # b = 0
+    r = 0
+    g = 0
+    b = 0
     # try:
     #     r = pi1.get_PWM_dutycycle(17)
     #     g = pi1.get_PWM_dutycycle(27)
@@ -132,4 +140,4 @@ def light_controls():
 
 if __name__ == '__main__':
     
-    app.run(host='0.0.0.0', threaded=True, port=5000)
+    app.run(threaded=True, port=5000)
