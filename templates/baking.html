@@ -21,10 +21,9 @@ Inside of each baked good page will be a list of the recipes with some sort of r
 I think that, for now, all reviews will have the same basic layout.<br>
 <br>
     <form method="POST" action="{{ url_for('baking') }}">
-        <input type="submit" value="Add a Recipe" name="add_recipe"/>
-        <input type="submit" value="Chocolate Chip Cookies" name="cc_cookies"/>
-        <input type="submit" value="Pull Apart Garlic Bread" name="pagb"/>
-
+        <input type="submit" value="Add a Food" name="baking_button"/><br><br>
+        <input type="submit" value="Chocolate Chip Cookies" name="baking_button"/><br><br>
+        <input type="submit" value="Pull Apart Garlic Bread" name="baking_button"/><br><br>
 </div>
 {% endblock %}
 

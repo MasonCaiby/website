@@ -91,13 +91,13 @@ def compare_grades_full():
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
     if request.method == 'POST':
-        print(request.form.keys())
-        return redirect(url_for('add_recipe'))
+        print(request.form)
+        return redirect(url_for('add_food'))
     return render_template('baking.html')
 
-@app.route('/add_recipe', methods=['GET', 'POST'])
-def add_recipe():
-    return render_template('add_recipe.html')
+@app.route('/add_food', methods=['GET', 'POST'])
+def add_food():
+    return render_template('add_food.html')
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication
@@ -140,4 +140,4 @@ def light_controls():
 
 if __name__ == '__main__':
     
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=5000, debug=True)
