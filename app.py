@@ -90,15 +90,21 @@ def compare_grades_full():
 
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
+    foods = ['Chocolate Chip Cookies', 'Garlic Bread']
+
     if request.method == 'POST':
         if 'Add a Food' == request.form['baking_button']:
             return redirect(url_for('add_food'))
         else:
             return redirect(url_for('view_food', food=request.form['baking_button']))
-    return render_template('baking.html')
+    return render_template('baking.html', foods=foods)
 
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
+    if request.method == 'POST':
+        print('description: ', request.form['description'])
+        print('food name: ', request.form['food_name'])
+        return redirect(url_for('view_food', food=request.form['food_name']))
     return render_template('add_food.html')
 
 @app.route('/view_food', methods=['GET', 'POST'])
