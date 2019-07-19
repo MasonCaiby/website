@@ -88,6 +88,12 @@ def compare_grades_full():
     return render_template('compare_grades_full.html')
 
 
+# a page with a description etc.
+@app.route('/genetic_art')
+def genetic_art():
+    return render_template('genetic_art.html')
+
+
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
     foods = ['Chocolate Chip Cookies', 'Garlic Bread']
