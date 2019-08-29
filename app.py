@@ -1,5 +1,5 @@
 from flask import Flask, request, session, g, url_for, \
-    render_template, flash
+    render_template, flash, redirect
 import numpy as np
 from helpers import fade_colors
 from basic_auth_edited import BasicAuth
@@ -63,12 +63,6 @@ def handler():
     return render_template('handler.html')
 
 
-@app.route('/test')
-@basic_auth.required
-def test():
-    return render_template('test.html')
-
-
 @app.route('/table')
 def table():
     return render_template('table.html')
@@ -83,15 +77,48 @@ def website():
 def auto_app():
     return render_template('auto_app.html')
 
+
 # a page with a description etc.
 @app.route('/compare_grades')
 def compare_grades():
     return render_template('compare_grades.html')
 
+
 # the full html page.
 @app.route('/compare_grades_full')
 def compare_grades_full():
     return render_template('compare_grades_full.html')
+
+
+# a page with a description etc.
+@app.route('/genetic_art')
+def genetic_art():
+    return render_template('genetic_art.html')
+
+
+@app.route('/baking', methods=['GET', 'POST'])
+def baking():
+    foods = ['Chocolate Chip Cookies', 'Garlic Bread']
+
+    if request.method == 'POST':
+        if 'Add a Food' == request.form['baking_button']:
+            return redirect(url_for('add_food'))
+        else:
+            return redirect(url_for('view_food', food=request.form['baking_button']))
+    return render_template('baking.html', foods=foods)
+
+@app.route('/add_food', methods=['GET', 'POST'])
+def add_food():
+    if request.method == 'POST':
+        print('description: ', request.form['description'])
+        print('food name: ', request.form['food_name'])
+        return redirect(url_for('view_food', food=request.form['food_name']))
+    return render_template('add_food.html')
+
+@app.route('/view_food', methods=['GET', 'POST'])
+def view_food():
+    food = request.args.get('food')
+    return render_template('view_food.html', food=food)
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication
@@ -102,9 +129,9 @@ def light_controls():
     # are controlling the table, it pulls the current value every time they
     # load it. I could move this into the html so people get live updates
     ## TODO: move into html for live update.
-    # r = 0
-    # g = 0
-    # b = 0
+    r = 0
+    g = 0
+    b = 0
     # try:
     #     r = pi1.get_PWM_dutycycle(17)
     #     g = pi1.get_PWM_dutycycle(27)
@@ -132,6 +159,5 @@ def light_controls():
                             b_value=b)
 
 
-if __name__ == '__main__':
-    sys.path.append(os.path.realpath('..'))
-    app.run(host='0.0.0.0', threaded=True, port=80)
+if __name__ == '__main__':    
+    app.run(threaded=True, port=5000, debug=True)

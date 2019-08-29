@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block body %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../static/styles.css">
+<div class="jumbotron text-center">
+
+<html>
+<body>
+<div class="align_right">
+I started baking more so I could impress girls with my chocolate chip cookies. So far, they've all bitten the cookies
+but no bites on the dating thing. Maybe it's because my jokes are too top notch?<br>
+<br>
+Anyway, I don't really know much about baking so I just copied a recipe. Then I got some feedback from people. In looks, I'm like a 4/10 on a good day so to bring my average up to an acceptable 5/10 I gotta get some 9/10 cookies(we'll ignore my abysmal personality score for now). I started tweaking the recipe and getting more feedback and tweaking the recipe more. Pretty quickly I couldn't keep track of the little changes I made nor could I keep track of the different ratings and comments people had given me. So I decided I would make a little recipe tracking and rating database. This is the start of that project.<br>
+<br>
+I haven't tied a SQL database into a Flask app in a really, really, long time. So this will be a fun refresher on how to get everything talking again. I'll also start exploring different forms and things. Hopefully it ends up looking cleaner. My friend Brennen told me my website was obviously built by an Eng that cared about making things work and not about how they looked. My rebuttal that I got a fancy haircut didn't seem to impact his opinion of me at all...<br>
+<br>
+I think I'll have a link to add a recipe, and then one to view the recipes I've worked with for each of my different baked goods so far.<br>
+<br>
+Inside of each baked goods page will be a list of the recipes with some sort of rating statistic. Then inside of each recipe I'll have the recipe, a breakdown of reviews, and a spot to add a review, I guess?<br>
+<br>
+I think that, for now, all reviews will have the same basic layout.<br>
+<br>
+    <form method="POST" action="{{ url_for('baking') }}">
+        <input type="submit" value="Add a Food" name="baking_button"/><br><br>
+        {% for food in foods %}
+            <input type="submit" value="{{ food }}" name="baking_button"/><br><br>
+        {% endfor %}
+</div>
+{% endblock %}
+
+</body>
+</html>

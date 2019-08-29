@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="jumbotron text-center">
+  <h1> Welcome to my genetic art project <p>
+    a.k.a.<p>
+    Mutating Masterpieces</h1>
+  I'm not going to copy my Github's README.md file or anything onto this page.
+  This was meant more as an intro to the project and an explanation of research
+  I did. I really just want you to click on the
+  <a href="https://github.com/MasonCaiby/idontart" target="blank">github<img class="new-window" src='static/new_window.png' title="new tab" alt="opens in new tab"></a>
+  link if you want some in depth results and a guide to my code.<p>
+<p>
+ I recently got inspired to start working on some computer generated art projects. I was interested in making a fractal
+    drawing algorithm, but apparently that's really hard. I also maybe don't understand them all the way? Anyway, I'll
+    revisit that sometime soonish maybe. I want to clean up some old repos first...<br>
+  ANYWHO, I implemented a genetic art algorithm, which was actually way easier than I originally thought it would be.
+    It probably took me... an hour or two (I haven't used PIL in awhile) to get the first version (add_children) working.
+    Then I also added something that just mutated existing shapes. They both perform adequately. I think I could tweak
+    both a bit to get better results, but I'm honestly happy with where they are. The fixed population sized one's error
+    obsessionally increases, but that's because of the way I'm drawing the shapes and I don't want to increase the over
+    head to avoid that.
+
+    I'll let both algorihms run for a bit and add some images to this page soon.
+</div>
+{% endblock %}
