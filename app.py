@@ -4,10 +4,13 @@ import numpy as np
 from helpers import fade_colors
 from basic_auth_edited import BasicAuth
 
+from baking.database import Database
+
 app = Flask(__name__)
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 
+db = Database()
 # password protected info for lights_control
 ## TODO: salt and hash password/username
 
@@ -102,8 +105,7 @@ def baking():
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     if request.method == 'POST':
-        print('description: ', request.form['description'])
-        print('food name: ', request.form['food_name'])
+        db.add_food(name=request.form['food_name'])
         return redirect(url_for('view_food', food=request.form['food_name']))
     return render_template('add_food.html')
 

@@ -4,7 +4,7 @@ import psycopg2
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from tables import tables, Food, Recipe, Review
+from baking.tables import tables, Food, Recipe, Review
 
 
 class Database:
@@ -49,7 +49,7 @@ class Database:
                             ENCODING = 'UTF8'
                             CONNECTION LIMIT = -1;"""
                         )
-
+            print(f"Made {dbname} database")
         except psycopg2.errors.DuplicateDatabase:
             print('Duplicate Database, passing')
 
@@ -70,16 +70,16 @@ class Database:
                          f"{', '.join(table['columns'])});"
 
                 cur.execute(create)
+                print(f"Made {table['name']} table")
 
             except psycopg2.errors.DuplicateTable:
                 print('Duplicate Table, passing')
 
-    def add_food(self, id, name):
+    def add_food(self, name):
         """ Adds an email to the data base."""
 
         session = self.Session()
-        food = Food(id=id,
-                    name=name)
+        food = Food(name=name)
 
         session.add(food)
         session.commit()
@@ -91,10 +91,9 @@ class Database:
         query.delete()
         session.commit()
 
-    def add_recipe(self, recipe_id, food_id, recipe_name, directions, notes, ingredients):
+    def add_recipe(self, food_id, recipe_name, directions, notes, ingredients):
         session = self.Session()
-        recipe = Recipe(recipe_id=recipe_id,
-                        food_id=food_id,
+        recipe = Recipe(food_id=food_id,
                         recipe_name=recipe_name,
                         directions=directions,
                         notes=notes,
@@ -109,10 +108,9 @@ class Database:
         query.delete()
         session.commit()
 
-    def add_review(self, review_id, recipe_id, reviewer_name, taste, texture, appearance, overall, comments):
+    def add_review(self, recipe_id, reviewer_name, taste, texture, appearance, overall, comments):
         session = self.Session()
-        review = Review(review_id=review_id,
-                        recipe_id=recipe_id,
+        review = Review(recipe_id=recipe_id,
                         reviewer_name=reviewer_name,
                         taste=taste,
                         texture=texture,
@@ -133,7 +131,7 @@ class Database:
 
 if __name__ == "__main__":
     database = Database()
-    database.create_database(dbname='weather_app')
+    database.create_database(dbname='baking')
 
-    database.create_tables(dbname='weather_app', tables=tables)
+    database.create_tables(dbname='baking', tables=tables)
 
