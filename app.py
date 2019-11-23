@@ -93,7 +93,8 @@ def compare_grades_full():
 
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
-    foods = ['Chocolate Chip Cookies', 'Garlic Bread']
+    food_dict = db.query_foods()
+    foods = food_dict.keys()
 
     if request.method == 'POST':
         if 'Add a Food' == request.form['baking_button']:
@@ -111,7 +112,11 @@ def add_food():
 
 @app.route('/view_food', methods=['GET', 'POST'])
 def view_food():
+    food_dict = db.query_foods()
     food = request.args.get('food')
+    food_id = food_dict[food]
+
+    
     return render_template('view_food.html', food=food)
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's

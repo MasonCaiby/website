@@ -128,6 +128,20 @@ class Database:
         query.delete()
         session.commit()
 
+    def query_foods(self):
+        con = psycopg2.connect(dbname='baking',
+                               user=self.data['database_user'],
+                               host='',
+                               password=self.data['database_password'])
+
+        cur = con.cursor()
+        cur.execute("""Select id, name from food;""")
+        foods = {food[1]: food[0] for food in cur.fetchall()}
+
+        print(foods)
+
+        return foods
+
 
 if __name__ == "__main__":
     database = Database()
