@@ -17,6 +17,8 @@ class Database:
         self.grab_data()
         self.get_session()
 
+        self.con = None
+
     def grab_data(self):
         """ Grabs the data from the config file and also makes a DATABSE_URI. I believe psycopg2 convention is
             to have that variable name in all caps."""
@@ -91,11 +93,12 @@ class Database:
         query.delete()
         session.commit()
 
-    def add_recipe(self, food_id, recipe_name, directions, notes, ingredients):
+    def add_recipe(self, food_id, recipe_name, directions, change, notes, ingredients):
         session = self.Session()
         recipe = Recipe(food_id=food_id,
                         recipe_name=recipe_name,
                         directions=directions,
+                        change=change,
                         notes=notes,
                         ingredients=ingredients)
         session.add(recipe)
@@ -129,18 +132,50 @@ class Database:
         session.commit()
 
     def query_foods(self):
-        con = psycopg2.connect(dbname='baking',
-                               user=self.data['database_user'],
-                               host='',
-                               password=self.data['database_password'])
+        self.make_query_con()
 
-        cur = con.cursor()
-        cur.execute("""Select id, name from food;""")
+        cur = self.con.cursor()
+        cur.execute("""SELECT id, name FROM food;""")
         foods = {food[1]: food[0] for food in cur.fetchall()}
 
-        print(foods)
-
         return foods
+
+    def query_recipes(self, food_id):
+        self.make_query_con()
+
+        cur = self.con.cursor()
+        cur.execute(f"""SELECT recipe_name, recipe_change, recipe_id FROM recipe
+                        WHERE food_id = {food_id}; """)
+
+        recipes = cur.fetchall()
+        recipes = {recipe[0]: (recipe[1], recipe[2]) for recipe in recipes}
+
+        return recipes
+
+    def query_reviews(self, recipe):
+        self.make_query_con()
+        cur = self.con.cursor()
+        cur.execute(f"""SELECT * from recipe
+                        WHERE food_id = {food_id}; """)
+
+        recipe = cur.fetchall()
+
+        print(recipe)
+        cur.execute(f"""SELECT * from reviews
+                                WHERE recipe_id = {recipe_id}; """)
+
+        reviews = cur.fetchall
+        print(reviews)
+        return
+
+    def make_query_con(self):
+        if not self.con:
+            self.con = psycopg2.connect(dbname='baking',
+                                        user=self.data['database_user'],
+                                        host='',
+                                        password=self.data['database_password'])
+
+
 
 
 if __name__ == "__main__":

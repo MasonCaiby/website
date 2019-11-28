@@ -103,6 +103,34 @@ def baking():
             return redirect(url_for('view_food', food=request.form['baking_button']))
     return render_template('baking.html', foods=foods)
 
+
+@app.route('/view_food', methods=['GET', 'POST'])
+def view_food():
+    if request.method == "GET":
+        food_dict = db.query_foods()
+        food = request.args.get('food')
+        food_id = food_dict[food]
+        recipes = db.query_recipes(food_id)
+
+    if request.method == 'POST':
+        if 'Add a Recipe' == request.form['recipe_selector']:
+            return redirect(url_for('add_recipe', food=request.args.get('food')))
+
+        return redirect(url_for('view_recipe', recipe=request.form['recipe_selector']))
+
+    return render_template('view_food.html', food=food, recipes=recipes)
+
+
+@app.route('/view_recipe', methods=['GET', 'POST'])
+def view_recipe():
+    if request.method == "GET":
+        recipe = request.args.get('recipe')
+        recipe_id = request.args.get('recipe_id')
+        db.query_reviews(recipe_id)
+
+    return f"Viewing recipe: {recipe}"
+
+
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     if request.method == 'POST':
@@ -110,14 +138,18 @@ def add_food():
         return redirect(url_for('view_food', food=request.form['food_name']))
     return render_template('add_food.html')
 
-@app.route('/view_food', methods=['GET', 'POST'])
-def view_food():
-    food_dict = db.query_foods()
-    food = request.args.get('food')
-    food_id = food_dict[food]
 
-    
-    return render_template('view_food.html', food=food)
+@app.route('/add_recipe', methods=['GET', 'POST'])
+def add_recipe():
+    if request.method == "POST":
+        db.add_recipe(food_id=request.args.get(['food_name']),
+                      recipe_name=request.form['recipe_name'],
+                      directions=request.form['directions'],
+                      change=request.form['recipe_change'],
+                      notes=request.form['notes'],
+                      ingredients=request.form['ingredients'])
+        return redirect(url_for('view_recipe', food=request.form['food_name']))
+
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication

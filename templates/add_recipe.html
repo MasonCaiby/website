@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block body %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../static/styles.css">
+<div class="jumbotron text-center">
+
+    <html>
+        <body>
+            <h1>Add a Recipe!</h1>
+                <div class="align_right">
+                    <form method="POST">
+                        <h3> Recipe </h3>
+                        <input type="text" id="recipe_name" placeholder="Recipe Name" name="recipe_name"/>
+                        <input type="text" id="directions" placeholder="Directions" name="directions"/>
+                        <input type="text" id="recipe_change" placeholder="Recipe Change" name="recipe_change"/>
+                        <input type="text" id="notes" placeholder="Notes" name="notes"/>
+                        <input type="text" id="ingredients" placeholder="Ingredients" name="ingredients"/>
+
+                        <input type="submit" id="submit_recipe" value="Add Recipe" name="submit_recipe"/>
+                    </form>
+                    <br>
+                </div>
+{% endblock %}
+
+        </body>
+    </html>
+</div>
