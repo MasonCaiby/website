@@ -106,29 +106,32 @@ def baking():
 
 @app.route('/view_food', methods=['GET', 'POST'])
 def view_food():
-    if request.method == "GET":
-        food_dict = db.query_foods()
-        food = request.args.get('food')
-        food_id = food_dict[food]
-        recipes = db.query_recipes(food_id)
-
     if request.method == 'POST':
-        if 'Add a Recipe' == request.form['recipe_selector']:
-            return redirect(url_for('add_recipe', food=request.args.get('food')))
+        selection = request.form['recipe_selector']
+        if 'Add a Recipe' == selection[:12]:
+            print(request.form)
+            return redirect(url_for('add_recipe', food='test'))
 
-        return redirect(url_for('view_recipe', recipe=request.form['recipe_selector']))
+        if selection:
+            return redirect(url_for('view_recipe',
+                                    recipe=request.form['recipe_selector']))
+
+    food_dict = db.query_foods()
+    food = request.args.get('food')
+    food_id = food_dict[food]
+    recipes = db.query_recipes(food_id)
 
     return render_template('view_food.html', food=food, recipes=recipes)
 
 
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
-    if request.method == "GET":
-        recipe = request.args.get('recipe')
-        recipe_id = request.args.get('recipe_id')
-        db.query_reviews(recipe_id)
+    recipe = request.args.get('recipe')
+    recipe, reviews = db.query_reviews(recipe)
 
-    return f"Viewing recipe: {recipe}"
+    print(reviews)
+
+    return render_template('view_ratings.html', reviews=reviews)
 
 
 @app.route('/add_food', methods=['GET', 'POST'])
@@ -149,7 +152,7 @@ def add_recipe():
                       notes=request.form['notes'],
                       ingredients=request.form['ingredients'])
         return redirect(url_for('view_recipe', food=request.form['food_name']))
-
+    return render_template('add_recipe.html')
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication

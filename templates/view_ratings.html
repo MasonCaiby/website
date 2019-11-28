@@ -8,12 +8,11 @@
 <body>
     viewing {{ food }}
 
-    <h2>recipes: </h2>
+    <h2>Ratings: </h2>
     <p>
-    <form method="POST" action="{{ url_for('view_recipe') }}">
-        {% for rating in ratings %}
-            <input type="submit" value="{{ ratings }}" name="recipe_selector"/><br><br>
-        {% endfor %}
+    {% for rating in reviews %}
+        {{ rating }}
+    {% endfor %}
     </p>
 
 {% endblock %}
