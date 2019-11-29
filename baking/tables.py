@@ -59,7 +59,7 @@ class Recipe(declarative_base()):
                f"ingredients={self.ingredients}"
 
     def __str__(self):
-        return f"Recipe(id={self.id}, name={self.name}"
+        return str(self.recipe_id)
 
 
 class Review(declarative_base()):

@@ -131,8 +131,8 @@ def view_food():
 
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
-    recipe = request.args.get('recipe')
-    recipe, reviews = db.query_reviews(recipe)
+    recipe_id = request.args.get('recipe_id')
+    recipe, reviews = db.query_reviews(recipe_id)
 
     print(reviews)
 
@@ -151,14 +151,14 @@ def add_food():
 def add_recipe():
     if request.method == "POST":
         food_dict = db.query_foods()
-
-        db.add_recipe(food_id=food_dict[request.args.get('food')],
-                      recipe_name=request.form['recipe_name'],
-                      directions=request.form['directions'],
-                      change=request.form['recipe_change'],
-                      notes=request.form['notes'],
-                      ingredients=request.form['ingredients'])
-        return redirect(url_for('view_recipe', food=request.form['food_name']))
+        recipe = request.form['recipe_name']
+        recipe_id = db.add_recipe(food_id=food_dict[request.args.get('food')],
+                                  recipe_name=recipe,
+                                  directions=request.form['directions'],
+                                  change=request.form['recipe_change'],
+                                  notes=request.form['notes'],
+                                  ingredients=request.form['ingredients'])
+        return redirect(url_for('view_recipe', recipe_id=recipe_id))
     return render_template('add_recipe.html')
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's

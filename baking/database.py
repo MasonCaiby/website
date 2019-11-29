@@ -103,7 +103,12 @@ class Database:
                         ingredients=ingredients)
         session.add(recipe)
         session.commit()
+
+        session.refresh(recipe)
+
         session.close()
+
+        return int(recipe.recipe_id)
 
     def delete_recipe(self, recipe_id):
         session = self.Session()
@@ -144,7 +149,7 @@ class Database:
         self.make_query_con()
 
         cur = self.con.cursor()
-        cur.execute(f"""SELECT recipe_name, recipe_change, recipe_id FROM recipe
+        cur.execute(f"""SELECT recipe_name, change, recipe_id FROM recipe
                         WHERE food_id = {food_id}; """)
 
         recipes = cur.fetchall()
@@ -152,16 +157,16 @@ class Database:
 
         return recipes
 
-    def query_reviews(self, recipe):
+    def query_reviews(self, recipe_id):
         self.make_query_con()
         cur = self.con.cursor()
         cur.execute(f"""SELECT * from recipe
-                        WHERE recipe_name = '{recipe}'; """)
+                        WHERE recipe_id = '{recipe_id}'; """)
 
         recipe = cur.fetchall()
 
         cur.execute(f"""SELECT * from reviews
-                                WHERE recipe_id = {recipe[0][0]}; """)
+                                WHERE recipe_id = {recipe_id}; """)
 
         reviews = cur.fetchall()
         return recipe, reviews
