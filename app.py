@@ -94,23 +94,28 @@ def compare_grades_full():
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
     food_dict = db.query_foods()
+    print(food_dict)
     foods = food_dict.keys()
 
     if request.method == 'POST':
         if 'Add a Food' == request.form['baking_button']:
             return redirect(url_for('add_food'))
         else:
-            return redirect(url_for('view_food', food=request.form['baking_button']))
+            food = request.form['baking_button']
+            return redirect(url_for('view_food',
+                                    food=food))
     return render_template('baking.html', foods=foods)
 
 
 @app.route('/view_food', methods=['GET', 'POST'])
 def view_food():
     if request.method == 'POST':
-        selection = request.form['recipe_selector']
-        if 'Add a Recipe' == selection[:12]:
-            print(request.form)
-            return redirect(url_for('add_recipe', food='test'))
+
+        selection = list(request.form.items())[0]
+
+        print("\n\nSELECTION: ", selection)
+        if selection[0] == 'add_recipe':
+            return redirect(url_for('add_recipe', food=selection[1]))
 
         if selection:
             return redirect(url_for('view_recipe',
@@ -145,7 +150,9 @@ def add_food():
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
     if request.method == "POST":
-        db.add_recipe(food_id=request.args.get(['food_name']),
+        food_dict = db.query_foods()
+
+        db.add_recipe(food_id=food_dict[request.args.get('food')],
                       recipe_name=request.form['recipe_name'],
                       directions=request.form['directions'],
                       change=request.form['recipe_change'],

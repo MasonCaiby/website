@@ -11,7 +11,11 @@
     <h2>recipes: </h2>
     <p>
     <form method="POST" action="{{ url_for('view_food') }}">
-        <input type="submit" value="Add a Recipe " name="recipe_selector"/><br><br>
+        <!--<input type="submit" value="Add a Recipe" name="recipe_selector"/><br><br>-->
+        <button name="add_recipe" type="submit" value="{{ food }}">Add a Recipe</button>
+        <br>
+        <br>
+
         {% for recipe in recipes %}
             <input type="submit" value="{{ recipe }}" name="recipe_selector"/><br><br>
         {% endfor %}

@@ -11,6 +11,7 @@ tables = [
      "columns": ["recipe_id serial PRIMARY KEY",
                  "food_id Integer",
                  "recipe_name TEXT",
+                 "change TEXT",
                  "directions TEXT",
                  "notes TEXT",
                  "ingredients TEXT"]
@@ -47,6 +48,7 @@ class Recipe(declarative_base()):
     recipe_id = Column(Integer, primary_key=True)
     food_id = Column(Integer)
     recipe_name = Column(String)
+    change=Column(String)
     directions = Column(String)
     notes = Column(String)
     ingredients = Column(String)
