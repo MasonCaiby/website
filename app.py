@@ -94,7 +94,6 @@ def compare_grades_full():
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
     food_dict = db.query_foods()
-    print(food_dict)
     foods = food_dict.keys()
 
     if request.method == 'POST':
@@ -117,7 +116,7 @@ def view_food():
             return redirect(url_for('add_recipe', food=selection[1]))
 
         if selection:
-            print("form | recipe selector:", request.form['recipe_selector'])
+
             return redirect(url_for('view_recipe',
                                     recipe_id=request.form['recipe_selector']))
 
@@ -134,10 +133,7 @@ def view_recipe():
     recipe_id = request.args.get('recipe_id')
     food = request.args.get('food')
     recipe, reviews = db.query_reviews(recipe_id)
-    print("recipe:", recipe)
     recipe = [str(line) for line in recipe[0]]
-    print("recipe:", recipe)
-    print(reviews)
 
     return render_template('view_ratings.html', recipe=recipe, reviews=reviews, food=food)
 

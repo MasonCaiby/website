@@ -164,7 +164,7 @@ class Database:
                         WHERE recipe_name = '{recipe_id}'; """)
 
         recipe = cur.fetchall()
-        print(recipe)
+        
 
         cur.execute(f"""SELECT * from reviews
                                 WHERE recipe_id = {recipe[0][0]}; """)
