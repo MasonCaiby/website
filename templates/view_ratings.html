@@ -6,8 +6,12 @@
 
 <html>
 <body>
-    viewing {{ food }}
+<h1>viewing {{ food }}</h1>
 
+    <h2>Recipe:</h2>
+    {% for recipe_line in recipe %}
+        {{ recipe_line }}<br>
+    {% endfor %}
     <h2>Ratings: </h2>
     <p>
     {% for rating in reviews %}

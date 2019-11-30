@@ -113,13 +113,13 @@ def view_food():
 
         selection = list(request.form.items())[0]
 
-        print("\n\nSELECTION: ", selection)
         if selection[0] == 'add_recipe':
             return redirect(url_for('add_recipe', food=selection[1]))
 
         if selection:
+            print("form | recipe selector:", request.form['recipe_selector'])
             return redirect(url_for('view_recipe',
-                                    recipe=request.form['recipe_selector']))
+                                    recipe_id=request.form['recipe_selector']))
 
     food_dict = db.query_foods()
     food = request.args.get('food')
@@ -132,11 +132,14 @@ def view_food():
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
     recipe_id = request.args.get('recipe_id')
+    food = request.args.get('food')
     recipe, reviews = db.query_reviews(recipe_id)
-
+    print("recipe:", recipe)
+    recipe = [str(line) for line in recipe[0]]
+    print("recipe:", recipe)
     print(reviews)
 
-    return render_template('view_ratings.html', reviews=reviews)
+    return render_template('view_ratings.html', recipe=recipe, reviews=reviews, food=food)
 
 
 @app.route('/add_food', methods=['GET', 'POST'])
@@ -158,7 +161,7 @@ def add_recipe():
                                   change=request.form['recipe_change'],
                                   notes=request.form['notes'],
                                   ingredients=request.form['ingredients'])
-        return redirect(url_for('view_recipe', recipe_id=recipe_id))
+        return redirect(url_for('view_recipe', recipe_id=recipe, food=request.args.get('food')))
     return render_template('add_recipe.html')
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's

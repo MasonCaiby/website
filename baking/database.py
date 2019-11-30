@@ -161,12 +161,13 @@ class Database:
         self.make_query_con()
         cur = self.con.cursor()
         cur.execute(f"""SELECT * from recipe
-                        WHERE recipe_id = '{recipe_id}'; """)
+                        WHERE recipe_name = '{recipe_id}'; """)
 
         recipe = cur.fetchall()
+        print(recipe)
 
         cur.execute(f"""SELECT * from reviews
-                                WHERE recipe_id = {recipe_id}; """)
+                                WHERE recipe_id = {recipe[0][0]}; """)
 
         reviews = cur.fetchall()
         return recipe, reviews
