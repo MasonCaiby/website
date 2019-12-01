@@ -115,10 +115,8 @@ def view_food():
         if selection[0] == 'add_recipe':
             return redirect(url_for('add_recipe', food=selection[1]))
 
-        if selection:
-
-            return redirect(url_for('view_recipe',
-                                    recipe_id=request.form['recipe_selector']))
+        return redirect(url_for('view_recipe',
+                                recipe_id=request.form['recipe_selector']))
 
     food_dict = db.query_foods()
     food = request.args.get('food')
@@ -131,6 +129,7 @@ def view_food():
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
     if request.method == 'POST':
+        print("recipe_id:", request.args.get('recipe_id'))
         return redirect(url_for('add_review', recipe_id=request.args.get('recipe_id')))
 
     recipe_id = request.args.get('recipe_id')
@@ -167,7 +166,17 @@ def add_recipe():
 @app.route('/add_review', methods=['GET', 'POST'])
 def add_review():
     if request.method == 'POST':
-        render_template('add_review.html')
+        form = request.form
+        print("recipe:", form)
+        db.add_review(form['recipe'],
+                      form['reviewer_name'],
+                      form['taste'],
+                      form['texture'],
+                      form['appearance'],
+                      form['overall'],
+                      form['comments'])
+        return redirect(url_for('baking'))
+
     return render_template('add_review.html')
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
