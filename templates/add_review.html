@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block body %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../static/styles.css">
+<div class="jumbotron text-center">
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Add a Review</h1>
+        <div class="align_right">
+            <form method="POST">
+                 <input type="hidden" id="recipe" name="recipe" value="{{ recipe_id }}">
+
+                <input type="text" id="reviewer_name" placeholder="Reviewer Name" name="reviewer_name"/> <br>
+
+                <label> Taste :
+                  <input type="range" name="taste" min="1" max="10" value="5"
+                         onchange="$('~ output', this).val(value)"
+                         oninput="$('~ output', this).val(value)">
+                  <output>5</output>
+                </label><br>
+
+                <label> Texture :
+                  <input type="range" name="texture" min="1" max="10" value="5"
+                         onchange="$('~ output', this).val(value)"
+                         oninput="$('~ output', this).val(value)">
+                  <output>5</output>
+                </label><br>
+
+                <label> Appearance :
+                  <input type="range" name="appearance" min="1" max="10" value="5"
+                         onchange="$('~ output', this).val(value)"
+                         oninput="$('~ output', this).val(value)">
+                  <output>5</output>
+                </label><br>
+
+                <label> Overall :
+                  <input type="range" name="overall" min="1" max="10" value="5"
+                         onchange="$('~ output', this).val(value)"
+                         oninput="$('~ output', this).val(value)">
+                  <output>5</output>
+                </label><br>
+
+                <textarea rows="5" cols="60" placeholder="Comments" name="comments"></textarea><br>
+
+                <input type="submit" id="submit_recipe" value="Add Recipe" name="submit_recipe"/>
+            </form>
+            <br>
+        </div>
+{% endblock %}
+
+        </body>
+    </html>
+</div>

@@ -130,6 +130,9 @@ def view_food():
 
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
+    if request.method == 'POST':
+        return redirect(url_for('add_review', recipe_id=request.args.get('recipe_id')))
+
     recipe_id = request.args.get('recipe_id')
     food = request.args.get('food')
     recipe, reviews = db.query_reviews(recipe_id)
@@ -159,6 +162,13 @@ def add_recipe():
                                   ingredients=request.form['ingredients'])
         return redirect(url_for('view_recipe', recipe_id=recipe, food=request.args.get('food')))
     return render_template('add_recipe.html')
+
+
+@app.route('/add_review', methods=['GET', 'POST'])
+def add_review():
+    if request.method == 'POST':
+        render_template('add_review.html')
+    return render_template('add_review.html')
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication

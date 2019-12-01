@@ -5,9 +5,15 @@
 <div class="jumbotron text-center">
 
 <html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <body>
 <h1>viewing {{ food }}</h1>
-
+<form method="POST" action="{{ url_for('view_recipe') }}">
+<button name="add_review" type="submit" value="test">Add a Review</button>
+<br>
     <h2>Recipe:</h2>
     {% for recipe_line in recipe %}
         {{ recipe_line }}<br>
@@ -23,3 +29,4 @@
 
 </body>
 </html>
+</div>
