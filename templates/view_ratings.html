@@ -10,9 +10,8 @@
     <title>Title</title>
 </head>
 <body>
-<h1>viewing {{ food }}</h1>
 <form method="POST" action="{{ url_for('view_recipe') }}">
-    <input type="hidden" id="recipe" name="recipe" value="{{ recipe[2] }}">
+    <input type="hidden" id="recipe_id" name="recipe_id" value="{{ recipe_id }}">
     <button name="add_review" type="submit" value="test">Add a Review</button>
 <br>
     <h2>Recipe:</h2>
@@ -22,7 +21,7 @@
     <h2>Ratings: </h2>
     <p>
     {% for rating in reviews %}
-        {{ rating }}
+        {{ rating }}<br>
     {% endfor %}
     </p>
 

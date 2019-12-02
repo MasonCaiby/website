@@ -154,19 +154,19 @@ class Database:
 
         recipes = cur.fetchall()
         recipes = {recipe[2]: (recipe[0], recipe[1]) for recipe in recipes}
-        print("recipes:", recipes)
+
         return recipes
 
     def query_reviews(self, recipe_id):
         self.make_query_con()
         cur = self.con.cursor()
         cur.execute(f"""SELECT * from recipe
-                        WHERE recipe_name = '{recipe_id}'; """)
+                        WHERE recipe_id = {recipe_id}; """)
 
         recipe = cur.fetchall()
 
         cur.execute(f"""SELECT * from reviews
-                                WHERE recipe_id = {recipe[0][0]}; """)
+                                WHERE recipe_id = {recipe_id}; """)
 
         reviews = cur.fetchall()
         return recipe, reviews

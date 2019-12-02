@@ -130,14 +130,14 @@ def view_food():
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
     if request.method == 'POST':
-        return redirect(url_for('add_review', recipe_id=request.form.get('recipe')))
+        return redirect(url_for('add_review', recipe_id=request.form.get('recipe_id')))
 
     recipe_id = request.args.get('recipe_id')
-    food = request.args.get('food')
     recipe, reviews = db.query_reviews(recipe_id)
     recipe = [str(line) for line in recipe[0]]
-    
-    return render_template('view_ratings.html', recipe=recipe, reviews=reviews, food=food)
+
+
+    return render_template('view_ratings.html', recipe=recipe, reviews=reviews, recipe_id=recipe_id)
 
 
 @app.route('/add_food', methods=['GET', 'POST'])
@@ -166,14 +166,13 @@ def add_recipe():
 def add_review():
     if request.method == 'POST':
         form = request.form
-        print("recipe:", form)
-        db.add_review(form['recipe'],
-                      form['reviewer_name'],
-                      form['taste'],
-                      form['texture'],
-                      form['appearance'],
-                      form['overall'],
-                      form['comments'])
+        db.add_review(recipe_id=request.args.get('recipe_id'),
+                      reviewer_name=form['reviewer_name'],
+                      taste=form['taste'],
+                      texture=form['texture'],
+                      appearance=form['appearance'],
+                      overall=form['overall'],
+                      comments=form['comments'])
         return redirect(url_for('baking'))
 
     return render_template('add_review.html', recipe_id=request.args.get('recipe_id'))

@@ -21,7 +21,7 @@
         <br>
         <input type="hidden" id="food_id" name="food_id" value="{{ food_id }}">
         {% for recipe_id, recipe in recipes.items() %}
-            <button name="add_recipe" type="submit" value="{{ recipe_id }}">{{ recipe[0] }}</button><br>
+            <button name="recipe_selector" type="submit" value="{{ recipe_id }}">{{ recipe[0] }}</button><br>
 
         {% endfor %}
     </p>
