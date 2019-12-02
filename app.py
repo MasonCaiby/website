@@ -103,6 +103,7 @@ def baking():
             food = request.form['baking_button']
             return redirect(url_for('view_food',
                                     food=food))
+
     return render_template('baking.html', foods=foods)
 
 
@@ -113,7 +114,7 @@ def view_food():
         selection = list(request.form.items())[0]
 
         if selection[0] == 'add_recipe':
-            return redirect(url_for('add_recipe', food=selection[1]))
+            return redirect(url_for('add_recipe', recipe_id=request.form.get('recipe_id')))
 
         return redirect(url_for('view_recipe',
                                 recipe_id=request.form['recipe_selector']))
@@ -123,20 +124,21 @@ def view_food():
     food_id = food_dict[food]
     recipes = db.query_recipes(food_id)
 
-    return render_template('view_food.html', food=food, recipes=recipes)
+    return render_template('view_food.html', food=food, recipes=recipes, food_id=food_id)
 
 
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
     if request.method == 'POST':
-        print("recipe_id:", request.args.get('recipe_id'))
-        return redirect(url_for('add_review', recipe_id=request.args.get('recipe_id')))
+        print("recipe_id:", request.args.get('recipe'))
+        print(request.form)
+        return redirect(url_for('add_review', recipe_id=request.form.get('recipe')))
 
     recipe_id = request.args.get('recipe_id')
     food = request.args.get('food')
     recipe, reviews = db.query_reviews(recipe_id)
     recipe = [str(line) for line in recipe[0]]
-
+    print(recipe)
     return render_template('view_ratings.html', recipe=recipe, reviews=reviews, food=food)
 
 
@@ -151,9 +153,8 @@ def add_food():
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
     if request.method == "POST":
-        food_dict = db.query_foods()
         recipe = request.form['recipe_name']
-        recipe_id = db.add_recipe(food_id=food_dict[request.args.get('food')],
+        recipe_id = db.add_recipe(food_id=request.args.get('food_id'),
                                   recipe_name=recipe,
                                   directions=request.form['directions'],
                                   change=request.form['recipe_change'],
@@ -177,7 +178,7 @@ def add_review():
                       form['comments'])
         return redirect(url_for('baking'))
 
-    return render_template('add_review.html')
+    return render_template('add_review.html', recipe_id=request.args.get('recipe_id'))
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication

@@ -12,7 +12,8 @@
 <body>
 <h1>viewing {{ food }}</h1>
 <form method="POST" action="{{ url_for('view_recipe') }}">
-<button name="add_review" type="submit" value="test">Add a Review</button>
+    <input type="hidden" id="recipe" name="recipe" value="{{ recipe[2] }}">
+    <button name="add_review" type="submit" value="test">Add a Review</button>
 <br>
     <h2>Recipe:</h2>
     {% for recipe_line in recipe %}
