@@ -10,20 +10,55 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST" action="{{ url_for('view_recipe') }}">
-    <input type="hidden" id="recipe_id" name="recipe_id" value="{{ recipe_id }}">
-    <button name="add_review" type="submit" value="test">Add a Review</button>
-<br>
-    <h2>Recipe:</h2>
-    {% for recipe_line in recipe %}
-        {{ recipe_line }}<br>
-    {% endfor %}
+
+    <div>
+        <form method="POST" action="{{ url_for('view_recipe') }}">
+        <input type="hidden" id="recipe_id" name="recipe_id" value="{{ recipe_id }}">
+        <button name="add_review" type="submit" value="test">Add a Review</button>
+    </form>
+
+    <div class="align_right">
+        <br>
+        <h2>Recipe: {{ recipe[0] }}</h2>
+        <h4>Recipe Change: </h4>{{ recipe[1] }}<br><br>
+
+        <h4>Directions: </h4>
+        {% for direction in recipe[2].split('\n') %}
+            {{ direction }}<br>
+        {% endfor %}
+
+        <br>
+
+        <h4>Notes: </h4>
+        {% for direction in recipe[3].split('\n') %}
+            {{ direction }}<br>
+
+        {% endfor %}
+
+        <br>
+
+        <h4>Ingredients: </h4>
+        {% for ingredient in recipe[4].split('\n') %}
+            {{ ingredient }}<br>
+
+        {% endfor %}
+        <br>
+        <br>
+
+    </div>
+
+
+    <div class="align_right">
     <h2>Ratings: </h2>
-    <p>
     {% for rating in reviews %}
-        {{ rating }}<br>
+        {{ rating }}
+        <br>
     {% endfor %}
-    </p>
+
+    </div>
+
+</form>
+</div>
 
 {% endblock %}
 

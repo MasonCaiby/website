@@ -85,7 +85,11 @@ class Database:
 
         session.add(food)
         session.commit()
+
+        session.refresh(food)
         session.close()
+
+        return int(food.id)
 
     def delete_food(self, id):
         session = self.Session()

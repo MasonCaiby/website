@@ -95,7 +95,6 @@ def compare_grades_full():
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
     food_dict = db.query_foods()
-    foods = food_dict.keys()
 
     if request.method == 'POST':
         if 'Add a Food' == request.form['baking_button']:
@@ -134,8 +133,8 @@ def view_recipe():
 
     recipe_id = request.args.get('recipe_id')
     recipe, reviews = db.query_reviews(recipe_id)
-    recipe = [str(line) for line in recipe[0]]
-
+    recipe = [str(line) for line in recipe[0][2:]]
+    reviews = [" | ".join([str(info1) for info1 in info]) for info in [review[2:] for review in reviews]]
 
     return render_template('view_ratings.html', recipe=recipe, reviews=reviews, recipe_id=recipe_id)
 
@@ -143,8 +142,8 @@ def view_recipe():
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     if request.method == 'POST':
-        db.add_food(name=request.form['food_name'])
-        return redirect(url_for('view_food', food=request.form['food_name']))
+        food_id = db.add_food(name=request.form['food_name'])
+        return redirect(url_for('view_food', food_id=food_id))
     return render_template('add_food.html')
 
 
@@ -158,7 +157,7 @@ def add_recipe():
                                   change=request.form['recipe_change'],
                                   notes=request.form['notes'],
                                   ingredients=request.form['ingredients'])
-        return redirect(url_for('view_recipe', recipe_id=recipe, food=request.args.get('food')))
+        return redirect(url_for('view_recipe', recipe_id=recipe_id, food=request.args.get('food')))
     return render_template('add_recipe.html')
 
 
@@ -173,7 +172,7 @@ def add_review():
                       appearance=form['appearance'],
                       overall=form['overall'],
                       comments=form['comments'])
-        return redirect(url_for('baking'))
+        return redirect(url_for('view_recipe', recipe_id=request.args.get('recipe_id')))
 
     return render_template('add_review.html', recipe_id=request.args.get('recipe_id'))
 

@@ -10,21 +10,26 @@
     <title>Title</title>
 </head>
 <body>
-    viewing {{ food }}
+<h1>Viewing {{ food }}</h1>
 
-    <h2>recipes: </h2>
-    <p>
-    <form method="POST" action="{{ url_for('view_food') }}">
 
-        <button name="add_recipe" type="submit" value="{{ food }}">Add a Recipe</button>
-        <br>
-        <br>
+<form method="POST" action="{{ url_for('view_food') }}">
+
+    <button name="add_recipe" type="submit" value="{{ food }}">Add a Recipe</button>
+    <br>
+    <br>
+    <div class="align_right">
+        <h2>Recipes: </h2>
         <input type="hidden" id="food_id" name="food_id" value="{{ food_id }}">
         {% for recipe_id, recipe in recipes.items() %}
-            <button name="recipe_selector" type="submit" value="{{ recipe_id }}">{{ recipe[0] }}</button><br>
+            <button name="recipe_selector" type="submit" value="{{ recipe_id }}">{{ recipe[0] }}</button><br><br>
 
         {% endfor %}
-    </p>
+    </div>
+
+</form>
+
+</div>
 
 {% endblock %}
 
