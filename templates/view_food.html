@@ -15,14 +15,14 @@
     <h2>recipes: </h2>
     <p>
     <form method="POST" action="{{ url_for('view_food') }}">
-        <!--<input type="submit" value="Add a Recipe" name="recipe_selector"/><br><br>-->
+
         <button name="add_recipe" type="submit" value="{{ food }}">Add a Recipe</button>
         <br>
         <br>
         <input type="hidden" id="food_id" name="food_id" value="{{ food_id }}">
         {% for recipe_id, recipe in recipes.items() %}
             <button name="add_recipe" type="submit" value="{{ recipe_id }}">{{ recipe[0] }}</button><br>
-            
+
         {% endfor %}
     </p>
 

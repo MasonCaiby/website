@@ -115,7 +115,7 @@ def view_food():
         selection = list(request.form.items())[0]
 
         if selection[0] == 'add_recipe':
-            return redirect(url_for('add_recipe', recipe_id=request.form.get('recipe_id')))
+            return redirect(url_for('add_recipe', food_id=request.form.get('food_id')))
 
         return redirect(url_for('view_recipe',
                                 recipe_id=request.form['recipe_selector']))
@@ -130,15 +130,13 @@ def view_food():
 @app.route('/view_recipe', methods=['GET', 'POST'])
 def view_recipe():
     if request.method == 'POST':
-        print("recipe_id:", request.args.get('recipe'))
-        print(request.form)
         return redirect(url_for('add_review', recipe_id=request.form.get('recipe')))
 
     recipe_id = request.args.get('recipe_id')
     food = request.args.get('food')
     recipe, reviews = db.query_reviews(recipe_id)
     recipe = [str(line) for line in recipe[0]]
-    print(recipe)
+    
     return render_template('view_ratings.html', recipe=recipe, reviews=reviews, food=food)
 
 
