@@ -154,7 +154,8 @@ class Database:
 
         cur = self.con.cursor()
         cur.execute(f"""SELECT recipe_name, change, recipe_id FROM recipe
-                        WHERE food_id = {food_id}; """)
+                        WHERE food_id = {food_id}
+                        ORDER BY recipe_id; """)
 
         recipes = cur.fetchall()
         recipes = {recipe[2]: (recipe[0], recipe[1]) for recipe in recipes}
