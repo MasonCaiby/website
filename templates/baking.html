@@ -22,8 +22,10 @@ I think that, for now, all reviews will have the same basic layout.<br>
 <br>
     <form method="POST" action="{{ url_for('baking') }}">
         <input type="submit" value="Add a Food" name="baking_button"/><br><br>
-        {% for food in foods %}
-            <input type="submit" value="{{ food }}" name="baking_button"/><br><br>
+        {% for food, food_id in foods.items() %}
+
+            <button name="baking_button" type="submit" value="{{ food_id }}">{{ food }}</button>
+
         {% endfor %}
 </div>
 {% endblock %}

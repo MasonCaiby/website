@@ -153,8 +153,8 @@ class Database:
                         WHERE food_id = {food_id}; """)
 
         recipes = cur.fetchall()
-        recipes = {recipe[0]: (recipe[1], recipe[2]) for recipe in recipes}
-
+        recipes = {recipe[2]: (recipe[0], recipe[1]) for recipe in recipes}
+        print("recipes:", recipes)
         return recipes
 
     def query_reviews(self, recipe_id):
@@ -178,6 +178,16 @@ class Database:
                                         host='',
                                         password=self.data['database_password'])
 
+    def food_name_from_id(self, food_id):
+        self.make_query_con()
+        cur = self.con.cursor()
+        cur.execute(f"""SELECT food from food
+                                WHERE id = '{food_id}'; """)
+
+        foods = cur.fetchall()
+        food = foods[0][0].split(",")[1][1:-2]
+
+        return food
 
 
 

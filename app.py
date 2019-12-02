@@ -1,10 +1,11 @@
 from flask import Flask, request, session, g, url_for, \
     render_template, flash, redirect
-import numpy as np
-from helpers import fade_colors
-from basic_auth_edited import BasicAuth
 
+from basic_auth_edited import BasicAuth
 from baking.database import Database
+
+# import numpy as np
+# from helpers import fade_colors
 
 app = Flask(__name__)
 
@@ -100,11 +101,11 @@ def baking():
         if 'Add a Food' == request.form['baking_button']:
             return redirect(url_for('add_food'))
         else:
-            food = request.form['baking_button']
+            food_id = request.form['baking_button']
             return redirect(url_for('view_food',
-                                    food=food))
+                                    food_id=food_id))
 
-    return render_template('baking.html', foods=foods)
+    return render_template('baking.html', foods=food_dict)
 
 
 @app.route('/view_food', methods=['GET', 'POST'])
@@ -119,10 +120,9 @@ def view_food():
         return redirect(url_for('view_recipe',
                                 recipe_id=request.form['recipe_selector']))
 
-    food_dict = db.query_foods()
-    food = request.args.get('food')
-    food_id = food_dict[food]
+    food_id = request.args.get('food_id')
     recipes = db.query_recipes(food_id)
+    food = db.food_name_from_id(food_id)
 
     return render_template('view_food.html', food=food, recipes=recipes, food_id=food_id)
 
