@@ -2,7 +2,7 @@ from flask import Flask, request, session, g, url_for, \
     render_template, flash, redirect
 
 from basic_auth_edited import BasicAuth
-from baking.database import Database
+from database import Database
 
 # import numpy as np
 # from helpers import fade_colors
@@ -217,4 +217,4 @@ def light_controls():
 
 if __name__ == '__main__':
     
-    app.run(threaded=True, port=5000, debug=True)
+    app.run(threaded=True, port=80, host='0.0.0.0')
