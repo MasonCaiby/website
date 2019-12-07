@@ -82,7 +82,7 @@ class Database:
 
         session = self.Session()
         food = Food(name=name)
-
+        print(self.data['database_password'])
         session.add(food)
         session.commit()
 
