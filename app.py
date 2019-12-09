@@ -7,6 +7,8 @@ from database import Database
 # import numpy as np
 # from helpers import fade_colors
 
+import sys,os
+
 app = Flask(__name__)
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
@@ -90,6 +92,12 @@ def compare_grades():
 @app.route('/compare_grades_full')
 def compare_grades_full():
     return render_template('compare_grades_full.html')
+
+
+# a page with a description etc.
+@app.route('/genetic_art')
+def genetic_art():
+    return render_template('genetic_art.html')
 
 
 @app.route('/baking', methods=['GET', 'POST'])
@@ -213,7 +221,6 @@ def light_controls():
     #         flash('You need to type a value between 0 and 255 for all boxes')
     return render_template('light_controls.html', r_value=r, g_value=g,
                             b_value=b)
-
 
 if __name__ == '__main__':
     
