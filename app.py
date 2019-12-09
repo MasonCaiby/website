@@ -1,8 +1,11 @@
 from flask import Flask, request, session, g, url_for, \
     render_template, flash, redirect
-import numpy as np
-from helpers import fade_colors
+
 from basic_auth_edited import BasicAuth
+from database import Database
+
+# import numpy as np
+# from helpers import fade_colors
 
 import sys,os
 
@@ -10,6 +13,7 @@ app = Flask(__name__)
 
 app.config.from_envvar('LIGHT_CONTROLS_SETTINGS', silent=True)
 
+db = Database()
 # password protected info for lights_control
 ## TODO: salt and hash password/username
 
@@ -98,27 +102,87 @@ def genetic_art():
 
 @app.route('/baking', methods=['GET', 'POST'])
 def baking():
-    foods = ['Chocolate Chip Cookies', 'Garlic Bread']
+    food_dict = db.query_foods()
 
     if request.method == 'POST':
         if 'Add a Food' == request.form['baking_button']:
             return redirect(url_for('add_food'))
         else:
-            return redirect(url_for('view_food', food=request.form['baking_button']))
-    return render_template('baking.html', foods=foods)
+            food_id = request.form['baking_button']
+            return redirect(url_for('view_food',
+                                    food_id=food_id))
+
+    return render_template('baking.html', foods=food_dict)
+
+
+@app.route('/view_food', methods=['GET', 'POST'])
+def view_food():
+    if request.method == 'POST':
+
+        selection = list(request.form.items())[0]
+
+        if selection[0] == 'add_recipe':
+            return redirect(url_for('add_recipe', food_id=request.form.get('food_id')))
+
+        return redirect(url_for('view_recipe',
+                                recipe_id=request.form['recipe_selector']))
+
+    food_id = request.args.get('food_id')
+    recipes = db.query_recipes(food_id)
+    food = db.food_name_from_id(food_id)
+
+    return render_template('view_food.html', food=food, recipes=recipes, food_id=food_id)
+
+
+@app.route('/view_recipe', methods=['GET', 'POST'])
+def view_recipe():
+    if request.method == 'POST':
+        return redirect(url_for('add_review', recipe_id=request.form.get('recipe_id')))
+
+    recipe_id = request.args.get('recipe_id')
+    recipe, reviews = db.query_reviews(recipe_id)
+    recipe = [str(line) for line in recipe[0][2:]]
+    reviews = [" | ".join([str(info1) for info1 in info]) for info in [review[2:] for review in reviews]]
+
+    return render_template('view_ratings.html', recipe=recipe, reviews=reviews, recipe_id=recipe_id)
+
 
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     if request.method == 'POST':
-        print('description: ', request.form['description'])
-        print('food name: ', request.form['food_name'])
-        return redirect(url_for('view_food', food=request.form['food_name']))
+        food_id = db.add_food(name=request.form['food_name'])
+        return redirect(url_for('view_food', food_id=food_id))
     return render_template('add_food.html')
 
-@app.route('/view_food', methods=['GET', 'POST'])
-def view_food():
-    food = request.args.get('food')
-    return render_template('view_food.html', food=food)
+
+@app.route('/add_recipe', methods=['GET', 'POST'])
+def add_recipe():
+    if request.method == "POST":
+        recipe = request.form['recipe_name']
+        recipe_id = db.add_recipe(food_id=request.args.get('food_id'),
+                                  recipe_name=recipe,
+                                  directions=request.form['directions'],
+                                  change=request.form['recipe_change'],
+                                  notes=request.form['notes'],
+                                  ingredients=request.form['ingredients'])
+        return redirect(url_for('view_recipe', recipe_id=recipe_id, food=request.args.get('food')))
+    return render_template('add_recipe.html')
+
+
+@app.route('/add_review', methods=['GET', 'POST'])
+def add_review():
+    if request.method == 'POST':
+        form = request.form
+        db.add_review(recipe_id=request.args.get('recipe_id'),
+                      reviewer_name=form['reviewer_name'],
+                      taste=form['taste'],
+                      texture=form['texture'],
+                      appearance=form['appearance'],
+                      overall=form['overall'],
+                      comments=form['comments'])
+        return redirect(url_for('view_recipe', recipe_id=request.args.get('recipe_id')))
+
+    return render_template('add_review.html', recipe_id=request.args.get('recipe_id'))
 
 # this will never be used. I Could just redirect all traffic to the example page, but want to keep it as it's
 # an ok example of authentication
@@ -158,6 +222,6 @@ def light_controls():
     return render_template('light_controls.html', r_value=r, g_value=g,
                             b_value=b)
 
-
-if __name__ == '__main__':    
-    app.run(threaded=True, port=80, debug=True, host = "0.0.0.0")
+if __name__ == '__main__':
+    
+    app.run(threaded=True, port=80, host='0.0.0.0')

@@ -1,0 +1,86 @@
+Food Items Table:
+Food ID | Food Name
+   1    |    CCC
+   2    |   Bread
+
+Recipe Table:
+Food ID  | Recipe ID  | Recipe Name  |  Directions     |  Recipe Delta  |  Notes
+   1     |     1      |     CCC v1   | '1. heat \n 2.' |      None!     |  Vegan
+   1     |     2      |     CCC v2   |                 | Browned Butter!|
+   2     |     3      |     Bread v1 |                 |      None!     |  Gluten Free
+
+Ingredients Table
+Recipe ID  |  Food Name  |  Quantity
+    1      |    Sugar    |   1 Cup
+    1      |    Salt     |   1 tsp
+    2      |    Salt     |   1 tsp
+
+
+Reviews Table
+Recipe ID  | Reviewer Name | Taste | Texture | Appearance | Overall | Comments
+    1      |      Mason    |   2   |    2    |      1     |    1    |  Try improving your personality first
+
+
+######################################
+
+CREATE TABLE foods (
+    id integer PRIMARY KEY,
+    name text NOT NULL);
+
+CREATE TABLE recipes (
+    recipe_id int PRIMARY KEY,
+    food_id int REFERENCES foods (id),
+    recipe_name text NOT NULL,
+    directions text NOT NULL,
+    recipe_change text NOT NULL,
+    notes text);
+
+CREATE TABLE ingredients (
+    recipe_id int REFERENCES recipes (recipe_id),
+    food_name text NOT NULL,
+    quantity text NOT NULL);
+
+CREATE TABLE reviews (
+    recipe_id int REFERENCES recipes (recipe_id),
+    reviewer_name text,
+    taste int NOT NULL,
+    texture int NOT NULL,
+    appearance int NOT NULL,
+    overall int NOT NULL,
+    comments text);
+
+ALTER TABLE reviews ADD CHECK (taste<=5);
+ALTER TABLE reviews ADD CHECK (texture<=5);
+ALTER TABLE reviews ADD CHECK (appearance<=5);
+ALTER TABLE reviews ADD CHECK (overall<=5);
+
+
+######################################
+
+
+INSERT INTO foods
+VALUES (1, 'Chocolate Chip Cookies');
+
+INSERT INTO recipes
+VALUES (1,
+        1,
+        'CCC V1.O',
+        'Brown Butter in pan\nMix Butter, Syrup and Sugars\nPut wet ingredients in freezer\nOnce cooled Beat in Eggs and Vanilla until Fluffy\nMix Dry Ingredients in separate bowl\nAdd Chocolate Chips\nMix Two Bowls\nPut dough in freezer for 25 minutes\nPreheat Over',
+        'first commit!',
+        'these ones are ok!');
+
+INSERT INTO ingredients
+VALUES (1,
+        'Flour',
+        '3 cups');
+
+INSERT INTO reviews
+VALUES (1,
+        'Max',
+        4,
+        4,
+        4,
+        4,
+        'Pretty ok, I guess');
+
+

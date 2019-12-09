@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block body %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../static/styles.css">
+<div class="jumbotron text-center">
+
+    <html>
+        <body>
+            <h1>Add a Recipe!</h1>
+                <div class="align_right">
+                    <form method="POST">
+                        <h3> Recipe </h3>
+
+                        <input type="text" id="recipe_name" placeholder="Recipe Name" name="recipe_name"/> <br>
+                        <textarea rows="5" cols="60" placeholder="Directions" name="directions"></textarea><br>
+                        <textarea rows="5" cols="60" placeholder="Recipe Change" name="recipe_change"></textarea><br>
+                        <textarea rows="5" cols="60" placeholder="Notes" name="notes"></textarea><br>
+                        <textarea rows="5" cols="60" placeholder="Ingredients" name="ingredients"></textarea><br>
+
+                        <input type="submit" id="submit_recipe" value="Add Recipe" name="submit_recipe"/>
+
+                        <input type="hidden" id="recipe_id" name="recipe_id" value="{{ recipe_id }}">
+                    </form>
+                    <br>
+                </div>
+{% endblock %}
+
+        </body>
+    </html>
+</div>
